@@ -61,7 +61,64 @@ function App() {
 <hr style={{margin:"40px 0"}} />
 
 <h2>📍 Atendimento</h2>
+<hr style={{margin:"40px 0"}} />
 
+<h2>🧾 Solicitar Orçamento</h2>
+
+<div style={{maxWidth:"400px", margin:"auto"}}>
+
+  <input
+    id="nome"
+    placeholder="Seu nome"
+    style={{
+      width:"100%",
+      padding:"12px",
+      margin:"8px 0",
+      borderRadius:"8px",
+      border:"none"
+    }}
+  />
+
+  <input
+    id="servico"
+    placeholder="Qual praga? (barata, rato, cupim...)"
+    style={{
+      width:"100%",
+      padding:"12px",
+      margin:"8px 0",
+      borderRadius:"8px",
+      border:"none"
+    }}
+  />
+
+  <button
+    onClick={() => {
+      const nome = (document.getElementById('nome') as HTMLInputElement).value
+      const servico = (document.getElementById('servico') as HTMLInputElement).value
+
+      const mensagem =
+        `Olá, meu nome é ${nome}. Gostaria de um orçamento para ${servico}.`
+
+      window.open(
+        `https://wa.me/5511932782539?text=${encodeURIComponent(mensagem)}`
+      )
+    }}
+    style={{
+      width:"100%",
+      padding:"14px",
+      background:"#22c55e",
+      color:"white",
+      border:"none",
+      borderRadius:"10px",
+      fontSize:"18px",
+      marginTop:"10px",
+      cursor:"pointer"
+    }}
+  >
+    📱 Pedir Orçamento
+  </button>
+
+</div>
 <p>
 São Paulo Capital • ABC Paulista • Santo André • São Bernardo •
 São Caetano • Diadema • Mauá
