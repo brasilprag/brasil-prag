@@ -36,6 +36,36 @@ function App() {
       </a>
 
       <p style={{marginTop:"25px"}}>
+        <hr style={{margin:"40px 0"}} />
+
+<h2>🪳 Nossos Serviços</h2>
+
+<div style={{display:"grid", gap:"10px", fontSize:"18px"}}>
+  <p>✔ Dedetização contra baratas</p>
+  <p>✔ Controle de ratos</p>
+  <p>✔ Eliminação de cupins</p>
+  <p>✔ Controle de mosquitos</p>
+  <p>✔ Controle de formigas</p>
+</div>
+
+<hr style={{margin:"40px 0"}} />
+
+<h2>⭐ O que nossos clientes dizem</h2>
+
+<div style={{maxWidth:"600px", margin:"auto"}}>
+  <p>"Atendimento rápido e muito profissional!" — Cliente Mooca</p>
+  <p>"Acabou com os cupins da minha casa." — Cliente Santo André</p>
+  <p>"Preço justo e serviço garantido." — Cliente São Bernardo</p>
+</div>
+
+<hr style={{margin:"40px 0"}} />
+
+<h2>📍 Atendimento</h2>
+
+<p>
+São Paulo Capital • ABC Paulista • Santo André • São Bernardo •
+São Caetano • Diadema • Mauá
+</p>
         ⭐ Atendimento rápido em toda Grande São Paulo
       </p>
 <a
