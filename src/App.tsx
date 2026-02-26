@@ -646,4 +646,63 @@ const S: Record<string, React.CSSProperties> = {
     borderRadius: 18,
     border: "1px solid rgba(34,197,94,0.20)",
     background:
-      "radial-gradient(260px 160px at 25% 35%, 
+      "radial-gradient(260px 160px at 25% 35%, rgba(34,197,94,0.18), rgba(255,255,255,0) 60%), #fff",
+    position: "relative",
+    overflow: "hidden",
+  },
+  baLabel: {
+    position: "absolute",
+    top: 12,
+    left: 12,
+    padding: "7px 10px",
+    borderRadius: 999,
+    border: "1px solid rgba(2,6,23,0.10)",
+    background: "rgba(255,255,255,0.90)",
+    fontWeight: 950,
+    fontSize: 12,
+  },
+
+  mobileBar: {
+    position: "fixed",
+    left: 0,
+    right: 0,
+    bottom: 0,
+    zIndex: 60,
+    padding: 10,
+    display: "grid",
+    gridTemplateColumns: "1fr 1fr 1.4fr",
+    gap: 10,
+    background: "rgba(255,255,255,0.92)",
+    borderTop: "1px solid rgba(2,6,23,0.08)",
+    backdropFilter: "blur(10px)",
+  },
+  mobileBtnSoft: {
+    textAlign: "center",
+    padding: "12px 10px",
+    borderRadius: 16,
+    background: "#fff",
+    border: "1px solid rgba(2,6,23,0.12)",
+    textDecoration: "none",
+    fontWeight: 950,
+    color: "#0b1220",
+  },
+  mobileBtn: {
+    textAlign: "center",
+    padding: "12px 10px",
+    borderRadius: 16,
+    background: "#22c55e",
+    border: "1px solid rgba(34,197,94,0.30)",
+    textDecoration: "none",
+    fontWeight: 950,
+    color: "#062415",
+    boxShadow: "0 18px 40px rgba(34,197,94,0.18)",
+  },
+};
+
+const css = `
+.fadeUp { animation: fadeUp 520ms ease-out both; }
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+`;
