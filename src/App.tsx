@@ -5,14 +5,11 @@ import logo from "./logo.png";
 // ✅ Fundo do topo
 import bgHero from "./assets/bg.jpg";
 
-// ✅ Pragas / serviços
+// ✅ Pragas / serviços (SEM mosquito/formiga/aranha)
 import imgRato from "./assets/rato.jpg";
 import imgBarata from "./assets/barata.jpg";
 import imgPercevejo from "./assets/percevejo.jpg";
 import imgCupim from "./assets/cupim.jpg";
-import imgMosquito from "./assets/mosquito.jpg";
-import imgFormiga from "./assets/formiga.jpg";
-import imgAranha from "./assets/aranha.jpg";
 import imgEscorpiao from "./assets/escorpiao.jpg";
 import imgPombo from "./assets/pombo.jpg";
 import imgMorcego from "./assets/morcego.jpg";
@@ -75,7 +72,6 @@ export default function App() {
 
   const services: Service[] = useMemo(
     () => [
-      // ✅ Rato
       {
         id: "desratizacao",
         tag: "DESRATIZAÇÃO",
@@ -89,7 +85,6 @@ export default function App() {
           "Olá! Quero orçamento para DESRATIZAÇÃO (ratos/camundongos) em São Paulo/ABC. Pode me atender?",
       },
 
-      // ✅ Barata
       {
         id: "dedetizacao-baratas",
         tag: "DEDETIZAÇÃO",
@@ -103,7 +98,6 @@ export default function App() {
           "Olá! Quero orçamento para DEDETIZAÇÃO contra BARATAS em São Paulo/ABC. Pode me atender?",
       },
 
-      // ✅ Percevejo de cama
       {
         id: "percevejo-cama",
         tag: "CONTROLE DE PERCEVEJO DE CAMA",
@@ -117,7 +111,6 @@ export default function App() {
           "Olá! Quero orçamento para CONTROLE DE PERCEVEJO DE CAMA em São Paulo/ABC. Pode me atender?",
       },
 
-      // ✅ Cupim de solo
       {
         id: "cupins",
         tag: "DESCUPINIZAÇÃO",
@@ -131,49 +124,6 @@ export default function App() {
           "Olá! Quero orçamento para DESCUPINIZAÇÃO (cupim de solo) em São Paulo/ABC. Pode me atender?",
       },
 
-      // ✅ Mosquitos
-      {
-        id: "mosquitos",
-        tag: "CONTROLE DE MOSQUITOS",
-        title: "Menos mosquitos, mais tranquilidade",
-        image: imgMosquito,
-        text:
-          "Redução de focos e proteção do ambiente com orientação preventiva. Ideal para residências e comércios.",
-        disease:
-          "⚠️ Podem transmitir doenças. Reduzir criadouros e tratar o ambiente ajuda na prevenção.",
-        waMessage:
-          "Olá! Quero orçamento para CONTROLE DE MOSQUITOS em São Paulo/ABC. Pode me atender?",
-      },
-
-      // ✅ Formigas
-      {
-        id: "formigas",
-        tag: "CONTROLE DE FORMIGAS",
-        title: "Formigas: controle e prevenção",
-        image: imgFormiga,
-        text:
-          "Aplicação técnica para eliminar trilhas e pontos de infestação, reduzindo reinfestações com orientação prática.",
-        disease:
-          "ℹ️ Podem contaminar alimentos e superfícies. Controle evita recorrência.",
-        waMessage:
-          "Olá! Quero orçamento para CONTROLE DE FORMIGAS em São Paulo/ABC. Pode me atender?",
-      },
-
-      // ✅ Aranhas
-      {
-        id: "aranhas",
-        tag: "CONTROLE DE ARANHAS",
-        title: "Aranhas: segurança em primeiro lugar",
-        image: imgAranha,
-        text:
-          "Tratamento do ambiente e pontos de abrigo para reduzir presença e risco, com orientação preventiva.",
-        disease:
-          "⚠️ Algumas espécies podem causar acidentes. Controle e prevenção são importantes.",
-        waMessage:
-          "Olá! Quero orçamento para CONTROLE DE ARANHAS em São Paulo/ABC. Pode me atender?",
-      },
-
-      // ✅ Escorpiões
       {
         id: "escorpioes",
         tag: "CONTROLE DE ESCORPIÕES",
@@ -187,7 +137,6 @@ export default function App() {
           "Olá! Quero orçamento para CONTROLE DE ESCORPIÕES em São Paulo/ABC. Pode me atender?",
       },
 
-      // ✅ Pombos
       {
         id: "pombos",
         tag: "MANEJO DE POMBOS",
@@ -196,26 +145,24 @@ export default function App() {
         text:
           "Soluções para reduzir pouso e permanência, com limpeza/orientação e medidas de exclusão.",
         disease:
-          "⚠️ Fezes podem contaminar áreas e causar riscos à saúde. Controle é importante.",
+          "⚠️ Fezes podem contaminar áreas e trazer riscos à saúde. Controle é importante.",
         waMessage:
           "Olá! Quero orçamento para CONTROLE/MANEJO DE POMBOS em São Paulo/ABC. Pode me atender?",
       },
 
-      // ✅ Morcegos
       {
         id: "morcegos",
         tag: "MANEJO DE MORCEGOS",
         title: "Morcegos: controle com segurança",
         image: imgMorcego,
         text:
-          "Orientação e medidas de exclusão para reduzir acesso e permanência, com foco em segurança do local.",
+          "Medidas de exclusão e orientação para reduzir acesso e permanência, com foco em segurança do local.",
         disease:
           "⚠️ Podem representar risco (ex.: raiva). É essencial manejo correto e seguro.",
         waMessage:
           "Olá! Quero orçamento para MANEJO/CONTROLE DE MORCEGOS em São Paulo/ABC. Pode me atender?",
       },
 
-      // ✅ Pulgas
       {
         id: "pulgas",
         tag: "CONTROLE DE PULGAS",
@@ -229,7 +176,6 @@ export default function App() {
           "Olá! Quero orçamento para CONTROLE DE PULGAS em São Paulo/ABC. Pode me atender?",
       },
 
-      // ✅ Carrapatos
       {
         id: "carrapatos",
         tag: "CONTROLE DE CARRAPATOS",
@@ -248,7 +194,6 @@ export default function App() {
 
   return (
     <div style={S.page}>
-      {/* TOPBAR */}
       <header style={S.topbar}>
         <div style={S.topbarInner}>
           <a href="#topo" style={S.brand}>
@@ -273,7 +218,6 @@ export default function App() {
         </div>
       </header>
 
-      {/* HERO com fundo (bg.jpg) escurecido + transparente */}
       <section id="topo" style={S.wrap}>
         <div style={S.hero} className="fadeUp">
           <div style={S.heroBgWrap}>
@@ -322,12 +266,10 @@ export default function App() {
         </div>
       </section>
 
-      {/* SEÇÕES NO PADRÃO */}
       {services.map((s) => (
         <ServiceSection key={s.id} service={s} />
       ))}
 
-      {/* ANTES E DEPOIS */}
       <section style={{ ...S.wrap, paddingBottom: 120 }}>
         <div style={S.sectionCard} className="fadeUp">
           <div style={S.content}>
@@ -358,7 +300,6 @@ export default function App() {
         </div>
       </section>
 
-      {/* BARRA FIXA MOBILE */}
       <div style={S.mobileBar}>
         <a href={`tel:${TEL_NUMBER_LINK}`} style={S.mobileBtnSoft}>
           📞 Ligar
@@ -497,7 +438,7 @@ const S: Record<string, React.CSSProperties> = {
     objectFit: "cover",
     filter: "blur(1.5px)",
     transform: "scale(1.05)",
-    opacity: 0.40, // ✅ transparência do fundo
+    opacity: 0.4,
   },
   heroOverlay: {
     position: "absolute",
@@ -505,10 +446,7 @@ const S: Record<string, React.CSSProperties> = {
     background:
       "linear-gradient(180deg, rgba(2,6,23,0.72), rgba(2,6,23,0.25) 55%, rgba(255,255,255,0.85) 100%)",
   },
-  heroContent: {
-    position: "relative",
-    padding: 14,
-  },
+  heroContent: { position: "relative", padding: 14 },
 
   heroKicker: {
     display: "inline-block",
