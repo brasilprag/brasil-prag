@@ -1,5 +1,5 @@
 import './App.css'
-import logo from './Ninja extermidor da BrasilPrag.png'
+import logo from './logo.png'
 function App() {
   return (
     <div style={{textAlign:"center", padding:"40px", fontFamily:"Arial"}}>
