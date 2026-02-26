@@ -38,7 +38,24 @@ function App() {
       <p style={{marginTop:"25px"}}>
         ⭐ Atendimento rápido em toda Grande São Paulo
       </p>
-
+<a
+  href="https://wa.me/5511932782539"
+  target="_blank"
+  style={{
+    position:"fixed",
+    bottom:"20px",
+    right:"20px",
+    background:"#25D366",
+    color:"white",
+    padding:"15px 18px",
+    borderRadius:"50px",
+    textDecoration:"none",
+    fontSize:"18px",
+    boxShadow:"0 4px 10px rgba(0,0,0,0.3)"
+  }}
+>
+  💬 WhatsApp
+</a>
     </div>
   )
 }
