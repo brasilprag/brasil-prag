@@ -480,6 +480,267 @@ function App() {
         </a>
       </div>
 
+      {/* CSS embutido: animações s  </div>
+      </section>
+
+      {/* SERVIÇOS (com imagens/ícones das pragas) */}
+      <section id="servicos" style={S.container}>
+        <div style={S.sectionHead}>
+          <h2 style={S.h2}>🪳 Tratamentos e pragas</h2>
+          <p style={S.p}>Cada card tem uma imagem (SVG) da praga — sem upload e sem links externos.</p>
+        </div>
+
+        <div style={S.cards} className="gridReveal">
+          <ServiceCard
+            title="Dedetização (Baratas)"
+            desc="Controle e prevenção com aplicação estratégica e orientação para evitar retorno."
+            icon={<IconCockroach />}
+            quickMsg="Olá! Quero orçamento para Dedetização contra baratas em São Paulo/ABC."
+          />
+          <ServiceCard
+            title="Desratização (Ratos)"
+            desc="Controle de roedores com medidas de segurança e recomendações de prevenção."
+            icon={<IconRat />}
+            quickMsg="Olá! Quero orçamento para Desratização (ratos) em São Paulo/ABC."
+          />
+          <ServiceCard
+            title="Descupinização (Cupins)"
+            desc="Tratamento direcionado para cupins — proteção e orientação para preservar madeira."
+            icon={<IconTermite />}
+            quickMsg="Olá! Quero orçamento para Descupinização (cupins) em São Paulo/ABC."
+          />
+          <ServiceCard
+            title="Controle de Mosquitos"
+            desc="Redução de foco e barreiras de proteção para ambientes internos e externos."
+            icon={<IconMosquito />}
+            quickMsg="Olá! Quero orçamento para Controle de Mosquitos em São Paulo/ABC."
+          />
+          <ServiceCard
+            title="Controle de Formigas"
+            desc="Aplicação técnica para eliminar e prevenir reinfestações de forma eficiente."
+            icon={<IconAnt />}
+            quickMsg="Olá! Quero orçamento para Controle de Formigas em São Paulo/ABC."
+          />
+          <ServiceCard
+            title="Residencial e Comercial"
+            desc="Atendemos casa, apartamento, comércio e condomínio — SP e ABC."
+            icon={
+              <svg viewBox="0 0 64 64" aria-hidden="true" style={S.iconSvg}>
+                <path d="M10 28l22-16 22 16v26H10V28z" fill="none" stroke="currentColor" strokeWidth="3" strokeLinejoin="round" />
+                <path d="M26 54V38h12v16" fill="none" stroke="currentColor" strokeWidth="3" strokeLinejoin="round" />
+                <path d="M18 34h8M38 34h8" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" opacity="0.75" />
+              </svg>
+            }
+            quickMsg="Olá! Quero orçamento para atendimento Residencial/Comercial em São Paulo/ABC."
+          />
+        </div>
+      </section>
+
+      {/* ANTES & DEPOIS */}
+      <section id="antes-depois" style={S.container}>
+        <div style={S.sectionHead}>
+          <h2 style={S.h2}>📸 Antes e Depois</h2>
+          <p style={S.p}>Uma vitrine premium: você pode pedir exemplos reais pelo WhatsApp.</p>
+        </div>
+
+        <div style={S.baWrap} className="reveal">
+          <div style={S.baToggle}>
+            <button
+              type="button"
+              onClick={() => setBaMode("antes")}
+              style={{ ...S.baBtn, ...(baMode === "antes" ? S.baBtnActive : {}) }}
+            >
+              Antes
+            </button>
+            <button
+              type="button"
+              onClick={() => setBaMode("depois")}
+              style={{ ...S.baBtn, ...(baMode === "depois" ? S.baBtnActive : {}) }}
+            >
+              Depois
+            </button>
+          </div>
+
+          <div style={S.baCanvas}>
+            <div
+              style={{
+                ...S.baPanel,
+                opacity: baMode === "antes" ? 1 : 0,
+                transform: baMode === "antes" ? "translateY(0)" : "translateY(8px)",
+                pointerEvents: baMode === "antes" ? "auto" : "none",
+              }}
+            >
+              <div style={S.baLabel}>ANTES</div>
+              <div style={S.baArtBefore} />
+              <div style={S.baText}>
+                Ambiente com sinais de pragas e pontos de risco. Identificação e estratégia.
+              </div>
+            </div>
+
+            <div
+              style={{
+                ...S.baPanel,
+                opacity: baMode === "depois" ? 1 : 0,
+                transform: baMode === "depois" ? "translateY(0)" : "translateY(8px)",
+                pointerEvents: baMode === "depois" ? "auto" : "none",
+              }}
+            >
+              <div style={S.baLabel}>DEPOIS</div>
+              <div style={S.baArtAfter} />
+              <div style={S.baText}>
+                Ambiente protegido com orientação de prevenção e barreiras de segurança.
+              </div>
+            </div>
+          </div>
+
+          <a
+            href={waLink(`Olá! Pode me enviar exemplos de ANTES e DEPOIS de serviços da ${EMPRESA}?`)}
+            target="_blank"
+            rel="noreferrer"
+            style={S.baCta}
+          >
+            💬 Pedir exemplos no WhatsApp
+          </a>
+        </div>
+      </section>
+
+      {/* ORÇAMENTO AUTOMÁTICO + MAPA */}
+      <section id="orcamento" style={{ ...S.container, paddingBottom: 96 }}>
+        <div style={S.sectionHead}>
+          <h2 style={S.h2}>🧾 Orçamento automático</h2>
+          <p style={S.p}>Preencha e envie direto para o WhatsApp com mensagem pronta.</p>
+        </div>
+
+        <div style={S.formCard} className="reveal">
+          <div style={S.formTitle}>Dados do orçamento</div>
+
+          <div style={S.formGrid}>
+            <input
+              value={form.nome}
+              onChange={(e) => setForm((p) => ({ ...p, nome: e.target.value }))}
+              placeholder="Seu nome"
+              style={S.input}
+            />
+            <input
+              value={form.praga}
+              onChange={(e) => setForm((p) => ({ ...p, praga: e.target.value }))}
+              placeholder="Qual praga? (barata, rato, cupim...)"
+              style={S.input}
+            />
+            <input
+              value={form.bairro}
+              onChange={(e) => setForm((p) => ({ ...p, bairro: e.target.value }))}
+              placeholder="Bairro / Cidade (ex: Mooca, São Paulo)"
+              style={S.input}
+            />
+
+            <div style={S.twoCols}>
+              <select
+                value={form.tipo}
+                onChange={(e) => setForm((p) => ({ ...p, tipo: e.target.value as TipoImovel }))}
+                style={S.select}
+              >
+                <option>Apartamento</option>
+                <option>Casa</option>
+                <option>Comércio</option>
+                <option>Condomínio</option>
+              </select>
+
+              <select
+                value={form.tamanho}
+                onChange={(e) => setForm((p) => ({ ...p, tamanho: e.target.value as Tamanho }))}
+                style={S.select}
+              >
+                <option>Pequeno</option>
+                <option>Médio</option>
+                <option>Grande</option>
+              </select>
+            </div>
+
+            <select
+              value={form.urgencia}
+              onChange={(e) => setForm((p) => ({ ...p, urgencia: e.target.value as Urgencia }))}
+              style={S.select}
+            >
+              <option>Hoje</option>
+              <option>24h</option>
+              <option>Esta semana</option>
+              <option>Sem pressa</option>
+            </select>
+
+            <a href={waLink(budgetMessage)} target="_blank" rel="noreferrer" style={S.primaryBtnFull}>
+              📱 Enviar orçamento no WhatsApp
+            </a>
+
+            <div style={S.hint}>
+              Atendimento: <b>SP Capital e ABC</b> • CNPJ <b>{CNPJ}</b>
+            </div>
+          </div>
+
+          <div style={S.mapWrap}>
+            <iframe
+              title="Mapa - São Paulo"
+              src="https://www.google.com/maps?q=S%C3%A3o%20Paulo%20SP&output=embed"
+              width="100%"
+              height="280"
+              style={{ border: 0 }}
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+            />
+          </div>
+
+          <div style={S.quickRow}>
+            <a href={`tel:${TEL_NUMBER_LINK}`} style={S.quickBtnAlt}>
+              📞 {TEL_NUMBER_DISPLAY}
+            </a>
+            <a href={INSTAGRAM_URL} target="_blank" rel="noreferrer" style={S.quickBtnAlt}>
+              📷 Instagram
+            </a>
+            <a href={waLink(baseMessage)} target="_blank" rel="noreferrer" style={S.quickBtn}>
+              💬 WhatsApp
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer style={S.footer}>
+        <div style={S.footerInner}>
+          <div>
+            © {new Date().getFullYear()} <b>{EMPRESA}</b> • CNPJ {CNPJ}
+          </div>
+          <div style={S.footerLinks}>
+            <a href={`tel:${TEL_NUMBER_LINK}`} style={S.footerLink}>
+              📞 {TEL_NUMBER_DISPLAY}
+            </a>
+            <a href={INSTAGRAM_URL} target="_blank" rel="noreferrer" style={S.footerLink}>
+              📷 Instagram
+            </a>
+            <a href={waLink(baseMessage)} target="_blank" rel="noreferrer" style={S.footerLink}>
+              💬 WhatsApp
+            </a>
+          </div>
+        </div>
+      </footer>
+
+      {/* Floating WhatsApp */}
+      <a href={waLink(baseMessage)} target="_blank" rel="noreferrer" style={S.fab} aria-label="Abrir WhatsApp">
+        💬 WhatsApp
+      </a>
+
+      {/* Mobile bottom CTA bar */}
+      <div style={S.mobileBar}>
+        <a href={`tel:${TEL_NUMBER_LINK}`} style={S.mobileBtnAlt} aria-label="Ligar agora">
+          📞 Ligar
+        </a>
+        <a href={INSTAGRAM_URL} target="_blank" rel="noreferrer" style={S.mobileBtnAlt} aria-label="Instagram">
+          📷 Insta
+        </a>
+        <a href={waLink(baseMessage)} target="_blank" rel="noreferrer" style={S.mobileBtn} aria-label="Orçar no WhatsApp">
+          💬 Orçar no WhatsApp
+        </a>
+      </div>
+
       {/* CSS embutido: animações s background: "rgba(2,6,23,0.35)",
                 }}
               >
