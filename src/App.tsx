@@ -1,22 +1,108 @@
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import "./App.css";
 import logo from "./logo.png";
+
+type TipoImovel = "Apartamento" | "Casa" | "Comércio" | "Condomínio";
+type Urgencia = "Hoje" | "24h" | "Esta semana" | "Sem pressa";
+type Tamanho = "Pequeno" | "Médio" | "Grande";
 
 type FormState = {
   nome: string;
   praga: string;
   bairro: string;
-  tipo: "Apartamento" | "Casa" | "Comércio" | "Condomínio";
-  urgencia: "Hoje" | "24h" | "Esta semana" | "Sem pressa";
+  tipo: TipoImovel;
+  tamanho: Tamanho;
+  urgencia: Urgencia;
 };
 
-const WHATSAPP_NUMBER = "5511932782539"; // BrasilPrag
 const EMPRESA = "BrasilPrag Dedetizadora";
 const SUBTITULO = "Atendimento em toda São Paulo e ABC";
 const CNPJ = "65.332.311/0001-01";
 
-function buildWaLink(message: string) {
+const WHATSAPP_NUMBER = "5511932782539";
+const TEL_NUMBER_DISPLAY = "(11) 93278-2539";
+const TEL_NUMBER_LINK = "+5511932782539";
+
+// ✅ Instagram já incluído
+const INSTAGRAM_URL = "https://www.instagram.com/brasilprag/";
+
+function waLink(message: string) {
   return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+}
+
+function safeText(s: string, fallback: string, max = 140) {
+  const t = (s || "").trim();
+  if (!t) return fallback;
+  if (t.length <= max) return t;
+  return t.slice(0, max).trim() + "…";
+}
+
+/** ====== ÍCONES (SVG) EMBUTIDOS — SEM UPLOAD ====== */
+function IconCockroach() {
+  return (
+    <svg viewBox="0 0 64 64" aria-hidden="true" style={S.iconSvg}>
+      <path d="M18 25c4-8 24-8 28 0" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" />
+      <path d="M22 28c-6 5-9 12-9 18 0 7 7 12 19 12s19-5 19-12c0-6-3-13-9-18" fill="none" stroke="currentColor" strokeWidth="3" strokeLinejoin="round" />
+      <path d="M32 24v34" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" opacity="0.7" />
+      <path d="M20 34l-8-6M20 42l-9 0M44 34l8-6M44 42l9 0" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" opacity="0.85" />
+      <path d="M24 16c-7-6-12-6-16-3M40 16c7-6 12-6 16-3" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" opacity="0.75" />
+      <circle cx="27" cy="30" r="1.6" fill="currentColor" />
+      <circle cx="37" cy="30" r="1.6" fill="currentColor" />
+    </svg>
+  );
+}
+
+function IconRat() {
+  return (
+    <svg viewBox="0 0 64 64" aria-hidden="true" style={S.iconSvg}>
+      <path d="M16 40c0-10 8-18 18-18h6c8 0 14 6 14 14v3c0 9-7 16-16 16H30c-8 0-14-6-14-15z" fill="none" stroke="currentColor" strokeWidth="3" strokeLinejoin="round" />
+      <path d="M22 22c-4-6-12-8-16-4" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" opacity="0.75" />
+      <path d="M50 46c5 2 8 5 10 10" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" opacity="0.75" />
+      <circle cx="40" cy="34" r="1.8" fill="currentColor" />
+      <path d="M44 38c2 0 4 1 5 2" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" opacity="0.8" />
+      <path d="M30 36l-8 2" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" opacity="0.8" />
+    </svg>
+  );
+}
+
+function IconTermite() {
+  return (
+    <svg viewBox="0 0 64 64" aria-hidden="true" style={S.iconSvg}>
+      <path d="M22 20c3-6 17-6 20 0" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" />
+      <path d="M20 30c0-6 6-10 12-10h0c6 0 12 4 12 10v2c0 7-6 12-12 12h0c-6 0-12-5-12-12v-2z" fill="none" stroke="currentColor" strokeWidth="3" strokeLinejoin="round" />
+      <path d="M18 42c0 9 6 14 14 14s14-5 14-14" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" opacity="0.85" />
+      <path d="M16 28l-8-4M48 28l8-4" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" opacity="0.8" />
+      <path d="M26 12c-5-3-10-2-14 1M38 12c5-3 10-2 14 1" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" opacity="0.7" />
+      <path d="M32 20v36" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" opacity="0.5" />
+    </svg>
+  );
+}
+
+function IconMosquito() {
+  return (
+    <svg viewBox="0 0 64 64" aria-hidden="true" style={S.iconSvg}>
+      <path d="M34 18c-6 0-10 5-10 11 0 8 5 14 10 14s10-6 10-14c0-6-4-11-10-11z" fill="none" stroke="currentColor" strokeWidth="3" strokeLinejoin="round" />
+      <path d="M34 14v36" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" opacity="0.55" />
+      <path d="M24 24c-8-6-16-6-20-2M24 34c-8 2-16 6-20 10" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" opacity="0.8" />
+      <path d="M44 24c8-6 16-6 20-2M44 34c8 2 16 6 20 10" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" opacity="0.8" />
+      <path d="M28 44l-10 12M40 44l10 12" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" opacity="0.8" />
+      <path d="M34 44c2 6 3 10 3 14" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" opacity="0.8" />
+    </svg>
+  );
+}
+
+function IconAnt() {
+  return (
+    <svg viewBox="0 0 64 64" aria-hidden="true" style={S.iconSvg}>
+      <circle cx="22" cy="30" r="6" fill="none" stroke="currentColor" strokeWidth="3" />
+      <circle cx="34" cy="34" r="7" fill="none" stroke="currentColor" strokeWidth="3" />
+      <circle cx="48" cy="38" r="8" fill="none" stroke="currentColor" strokeWidth="3" />
+      <path d="M16 24c-5-4-10-5-14-2M16 36c-5 2-10 5-14 9" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" opacity="0.8" />
+      <path d="M26 22c-2-6 0-10 5-12M26 38c-2 6 0 10 5 12" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" opacity="0.8" />
+      <path d="M56 28c4-4 8-5 12-2M56 46c4 2 8 5 12 9" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" opacity="0.8" />
+      <path d="M22 20c-6-8-12-9-18-6" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" opacity="0.65" />
+    </svg>
+  );
 }
 
 function App() {
@@ -25,295 +111,376 @@ function App() {
     praga: "",
     bairro: "",
     tipo: "Apartamento",
+    tamanho: "Médio",
     urgencia: "24h",
   });
 
-  const quickMessage = useMemo(() => {
-    const nome = form.nome?.trim() || "Cliente";
-    const praga = form.praga?.trim() || "controle de pragas";
-    const bairro = form.bairro?.trim() || "São Paulo";
-    return `Olá! Meu nome é ${nome}. Gostaria de um orçamento para ${praga}. Local: ${bairro}. Tipo de imóvel: ${form.tipo}. Urgência: ${form.urgencia}.`;
-  }, [form]);
+  const [scrolled, setScrolled] = useState(false);
+  const [baMode, setBaMode] = useState<"antes" | "depois">("depois");
 
-  const baseMessage = useMemo(() => {
-    return `Olá! Quero um orçamento para dedetização/controle de pragas em São Paulo/ABC.`;
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 8);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  const baseMessage = useMemo(
+    () => `Olá! Quero um orçamento com a ${EMPRESA}. Atendimento em São Paulo/ABC.`,
+    []
+  );
+
+  const budgetMessage = useMemo(() => {
+    const nome = safeText(form.nome, "Cliente", 60);
+    const praga = safeText(form.praga, "controle de pragas", 160);
+    const bairro = safeText(form.bairro, "São Paulo", 160);
+    return `Olá! Meu nome é ${nome}. Gostaria de um orçamento para ${praga}. Local: ${bairro}. Tipo: ${form.tipo}. Tamanho: ${form.tamanho}. Urgência: ${form.urgencia}.`;
+  }, [form]);
+
   return (
-    <div
-      style={{
-        minHeight: "100vh",
-        background:
-          "radial-gradient(1200px 600px at 20% 0%, rgba(34,197,94,0.22), rgba(2,6,23,0) 60%), radial-gradient(900px 500px at 100% 20%, rgba(59,130,246,0.18), rgba(2,6,23,0) 55%), linear-gradient(180deg, #020617 0%, #050b1d 50%, #020617 100%)",
-        color: "#e5e7eb",
-        fontFamily:
-          'ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif',
-      }}
-    >
-      {/* Top bar */}
-      <div
+    <div style={S.page}>
+      {/* Topbar */}
+      <header
         style={{
-          position: "sticky",
-          top: 0,
-          zIndex: 10,
-          backdropFilter: "blur(10px)",
-          background: "rgba(2,6,23,0.55)",
-          borderBottom: "1px solid rgba(148,163,184,0.15)",
+          ...S.topbar,
+          background: scrolled ? "rgba(2,6,23,0.80)" : "rgba(2,6,23,0.45)",
+          borderBottom: scrolled
+            ? "1px solid rgba(148,163,184,0.18)"
+            : "1px solid rgba(148,163,184,0.10)",
         }}
       >
-        <div
-          style={{
-            maxWidth: 1100,
-            margin: "0 auto",
-            padding: "14px 18px",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-            gap: 12,
-          }}
-        >
-          <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-            <img
-              src={logo}
-              alt="Logo BrasilPrag"
-              style={{
-                width: 44,
-                height: 44,
-                borderRadius: 12,
-                objectFit: "cover",
-                boxShadow: "0 10px 30px rgba(0,0,0,0.35)",
-              }}
-            />
+        <div style={S.topbarInner}>
+          <a href="#topo" style={S.brand} aria-label="Ir para o topo">
+            <img src={logo} alt="Logo BrasilPrag" style={S.brandLogo} />
             <div style={{ lineHeight: 1.1 }}>
-              <div style={{ fontWeight: 800, letterSpacing: 0.2 }}>
-                {EMPRESA}
+              <div style={S.brandName}>{EMPRESA}</div>
+              <div style={S.brandSub}>{SUBTITULO}</div>
+            </div>
+          </a>
+
+          <div style={S.topbarActions}>
+            <a href={`tel:${TEL_NUMBER_LINK}`} style={S.iconBtn} aria-label="Ligar agora">
+              📞
+            </a>
+            <a href={INSTAGRAM_URL} target="_blank" rel="noreferrer" style={S.iconBtn} aria-label="Instagram">
+              📷
+            </a>
+            <a href={waLink(baseMessage)} target="_blank" rel="noreferrer" style={S.ctaSmall} aria-label="Orçar no WhatsApp">
+              💬 Orçar
+            </a>
+          </div>
+        </div>
+      </header>
+
+      {/* HERO */}
+      <section id="topo" style={S.container}>
+        <div style={S.heroCard} className="reveal">
+          <div style={S.badges}>
+            <span style={S.badgeGreen}>✅ SP + ABC</span>
+            <span style={S.badgeDark}>⏱️ Atendimento rápido</span>
+            <span style={S.badgeDark}>🏠 Residencial & Comercial</span>
+          </div>
+
+          <h1 style={S.h1} className="fadeUp">
+            Dedetização premium em São Paulo com padrão profissional
+          </h1>
+
+          <p style={S.lead} className="fadeUpDelay">
+            Controle de <b>baratas</b>, <b>ratos</b>, <b>cupins</b>, <b>mosquitos</b> e <b>formigas</b>.
+            Atendimento em toda Grande São Paulo com orientação antes e depois do serviço.
+          </p>
+
+          <div style={S.heroActions} className="fadeUpDelay2">
+            <a href={waLink(baseMessage)} target="_blank" rel="noreferrer" style={S.primaryBtn}>
+              📱 WhatsApp
+            </a>
+            <a href="#orcamento" style={S.secondaryBtn}>
+              🧾 Orçamento automático
+            </a>
+            <a href={`tel:${TEL_NUMBER_LINK}`} style={S.ghostBtn}>
+              📞 Ligar agora
+            </a>
+            <a href={INSTAGRAM_URL} target="_blank" rel="noreferrer" style={S.ghostBtn}>
+              📷 Instagram
+            </a>
+          </div>
+
+          <div style={S.heroMini} className="fadeUpDelay3">
+            <div style={S.miniItem}>
+              <div style={S.miniTitle}>Empresa</div>
+              <div style={S.miniText}>
+                {EMPRESA} • <b>CNPJ {CNPJ}</b>
               </div>
-              <div style={{ fontSize: 12, color: "rgba(226,232,240,0.75)" }}>
-                {SUBTITULO}
+            </div>
+            <div style={S.miniItem}>
+              <div style={S.miniTitle}>Áreas atendidas</div>
+              <div style={S.miniText}>
+                São Paulo Capital • ABC Paulista • Santo André • São Bernardo • São Caetano • Diadema • Mauá
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* SERVIÇOS (com imagens/ícones das pragas) */}
+      <section id="servicos" style={S.container}>
+        <div style={S.sectionHead}>
+          <h2 style={S.h2}>🪳 Tratamentos e pragas</h2>
+          <p style={S.p}>Cada card tem uma imagem (SVG) da praga — sem upload e sem links externos.</p>
+        </div>
+
+        <div style={S.cards} className="gridReveal">
+          <ServiceCard
+            title="Dedetização (Baratas)"
+            desc="Controle e prevenção com aplicação estratégica e orientação para evitar retorno."
+            icon={<IconCockroach />}
+            quickMsg="Olá! Quero orçamento para Dedetização contra baratas em São Paulo/ABC."
+          />
+          <ServiceCard
+            title="Desratização (Ratos)"
+            desc="Controle de roedores com medidas de segurança e recomendações de prevenção."
+            icon={<IconRat />}
+            quickMsg="Olá! Quero orçamento para Desratização (ratos) em São Paulo/ABC."
+          />
+          <ServiceCard
+            title="Descupinização (Cupins)"
+            desc="Tratamento direcionado para cupins — proteção e orientação para preservar madeira."
+            icon={<IconTermite />}
+            quickMsg="Olá! Quero orçamento para Descupinização (cupins) em São Paulo/ABC."
+          />
+          <ServiceCard
+            title="Controle de Mosquitos"
+            desc="Redução de foco e barreiras de proteção para ambientes internos e externos."
+            icon={<IconMosquito />}
+            quickMsg="Olá! Quero orçamento para Controle de Mosquitos em São Paulo/ABC."
+          />
+          <ServiceCard
+            title="Controle de Formigas"
+            desc="Aplicação técnica para eliminar e prevenir reinfestações de forma eficiente."
+            icon={<IconAnt />}
+            quickMsg="Olá! Quero orçamento para Controle de Formigas em São Paulo/ABC."
+          />
+          <ServiceCard
+            title="Residencial e Comercial"
+            desc="Atendemos casa, apartamento, comércio e condomínio — SP e ABC."
+            icon={
+              <svg viewBox="0 0 64 64" aria-hidden="true" style={S.iconSvg}>
+                <path d="M10 28l22-16 22 16v26H10V28z" fill="none" stroke="currentColor" strokeWidth="3" strokeLinejoin="round" />
+                <path d="M26 54V38h12v16" fill="none" stroke="currentColor" strokeWidth="3" strokeLinejoin="round" />
+                <path d="M18 34h8M38 34h8" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" opacity="0.75" />
+              </svg>
+            }
+            quickMsg="Olá! Quero orçamento para atendimento Residencial/Comercial em São Paulo/ABC."
+          />
+        </div>
+      </section>
+
+      {/* ANTES & DEPOIS */}
+      <section id="antes-depois" style={S.container}>
+        <div style={S.sectionHead}>
+          <h2 style={S.h2}>📸 Antes e Depois</h2>
+          <p style={S.p}>Uma vitrine premium: você pode pedir exemplos reais pelo WhatsApp.</p>
+        </div>
+
+        <div style={S.baWrap} className="reveal">
+          <div style={S.baToggle}>
+            <button
+              type="button"
+              onClick={() => setBaMode("antes")}
+              style={{ ...S.baBtn, ...(baMode === "antes" ? S.baBtnActive : {}) }}
+            >
+              Antes
+            </button>
+            <button
+              type="button"
+              onClick={() => setBaMode("depois")}
+              style={{ ...S.baBtn, ...(baMode === "depois" ? S.baBtnActive : {}) }}
+            >
+              Depois
+            </button>
+          </div>
+
+          <div style={S.baCanvas}>
+            <div
+              style={{
+                ...S.baPanel,
+                opacity: baMode === "antes" ? 1 : 0,
+                transform: baMode === "antes" ? "translateY(0)" : "translateY(8px)",
+                pointerEvents: baMode === "antes" ? "auto" : "none",
+              }}
+            >
+              <div style={S.baLabel}>ANTES</div>
+              <div style={S.baArtBefore} />
+              <div style={S.baText}>
+                Ambiente com sinais de pragas e pontos de risco. Identificação e estratégia.
+              </div>
+            </div>
+
+            <div
+              style={{
+                ...S.baPanel,
+                opacity: baMode === "depois" ? 1 : 0,
+                transform: baMode === "depois" ? "translateY(0)" : "translateY(8px)",
+                pointerEvents: baMode === "depois" ? "auto" : "none",
+              }}
+            >
+              <div style={S.baLabel}>DEPOIS</div>
+              <div style={S.baArtAfter} />
+              <div style={S.baText}>
+                Ambiente protegido com orientação de prevenção e barreiras de segurança.
               </div>
             </div>
           </div>
 
           <a
-            href={buildWaLink(baseMessage)}
+            href={waLink(`Olá! Pode me enviar exemplos de ANTES e DEPOIS de serviços da ${EMPRESA}?`)}
             target="_blank"
             rel="noreferrer"
-            style={{
-              background: "#22c55e",
-              color: "#052e16",
-              padding: "10px 14px",
-              borderRadius: 12,
-              textDecoration: "none",
-              fontWeight: 800,
-              boxShadow: "0 14px 30px rgba(34,197,94,0.25)",
-              border: "1px solid rgba(34,197,94,0.35)",
-              whiteSpace: "nowrap",
-            }}
+            style={S.baCta}
           >
-            💬 Orçamento no WhatsApp
+            💬 Pedir exemplos no WhatsApp
           </a>
         </div>
-      </div>
+      </section>
 
-      {/* Hero */}
-      <section
-        style={{
-          maxWidth: 1100,
-          margin: "0 auto",
-          padding: "44px 18px 18px",
-          display: "grid",
-          gridTemplateColumns: "1.05fr 0.95fr",
-          gap: 18,
-        }}
-      >
-        <div
-          style={{
-            padding: 24,
-            borderRadius: 22,
-            border: "1px solid rgba(148,163,184,0.18)",
-            background:
-              "linear-gradient(180deg, rgba(15,23,42,0.72), rgba(2,6,23,0.72))",
-            boxShadow: "0 20px 60px rgba(0,0,0,0.35)",
-          }}
-        >
-          <div
-            style={{
-              display: "inline-flex",
-              alignItems: "center",
-              gap: 10,
-              padding: "8px 12px",
-              borderRadius: 999,
-              border: "1px solid rgba(34,197,94,0.35)",
-              background: "rgba(34,197,94,0.10)",
-              color: "rgba(187,247,208,0.95)",
-              fontWeight: 700,
-              fontSize: 13,
-            }}
-          >
-            ✅ Atendimento rápido • SP Capital + ABC
-          </div>
-
-          <h1
-            style={{
-              margin: "14px 0 10px",
-              fontSize: 40,
-              lineHeight: 1.1,
-              fontWeight: 900,
-              letterSpacing: -0.5,
-            }}
-          >
-            Controle de Pragas com padrão profissional em São Paulo
-          </h1>
-
-          <p style={{ margin: 0, color: "rgba(226,232,240,0.82)", fontSize: 16 }}>
-            Soluções para <b>baratas</b>, <b>ratos</b>, <b>cupins</b>,{" "}
-            <b>mosquitos</b> e <b>formigas</b>. Atendimento em toda Grande São
-            Paulo com agendamento rápido.
-          </p>
-
-          <div
-            style={{
-              marginTop: 18,
-              display: "flex",
-              flexWrap: "wrap",
-              gap: 10,
-            }}
-          >
-            {[
-              "✅ Orçamento rápido no WhatsApp",
-              "✅ Atendimento SP e ABC",
-              "✅ Para casa e comércio",
-              "✅ Equipe profissional",
-            ].map((t) => (
-              <span
-                key={t}
-                style={{
-                  padding: "8px 10px",
-                  borderRadius: 12,
-                  border: "1px solid rgba(148,163,184,0.16)",
-                  background: "rgba(2,6,23,0.45)",
-                  color: "rgba(226,232,240,0.9)",
-                  fontSize: 13,
-                  fontWeight: 700,
-                }}
-              >
-                {t}
-              </span>
-            ))}
-          </div>
-
-          <div style={{ marginTop: 18, display: "flex", gap: 12, flexWrap: "wrap" }}>
-            <a
-              href={buildWaLink(baseMessage)}
-              target="_blank"
-              rel="noreferrer"
-              style={{
-                background: "#22c55e",
-                color: "#052e16",
-                padding: "14px 16px",
-                borderRadius: 14,
-                textDecoration: "none",
-                fontWeight: 900,
-                fontSize: 16,
-                boxShadow: "0 14px 30px rgba(34,197,94,0.25)",
-                border: "1px solid rgba(34,197,94,0.35)",
-              }}
-            >
-              📱 Solicitar orçamento agora
-            </a>
-
-            <a
-              href="#orcamento"
-              style={{
-                background: "rgba(148,163,184,0.12)",
-                color: "rgba(226,232,240,0.92)",
-                padding: "14px 16px",
-                borderRadius: 14,
-                textDecoration: "none",
-                fontWeight: 900,
-                fontSize: 16,
-                border: "1px solid rgba(148,163,184,0.18)",
-              }}
-            >
-              🧾 Fazer orçamento automático
-            </a>
-          </div>
-
-          <div style={{ marginTop: 16, fontSize: 12, color: "rgba(226,232,240,0.65)" }}>
-            CNPJ: <b>{CNPJ}</b> • {SUBTITULO}
-          </div>
+      {/* ORÇAMENTO AUTOMÁTICO + MAPA */}
+      <section id="orcamento" style={{ ...S.container, paddingBottom: 96 }}>
+        <div style={S.sectionHead}>
+          <h2 style={S.h2}>🧾 Orçamento automático</h2>
+          <p style={S.p}>Preencha e envie direto para o WhatsApp com mensagem pronta.</p>
         </div>
 
-        {/* Side card */}
-        <div
-          style={{
-            padding: 24,
-            borderRadius: 22,
-            border: "1px solid rgba(148,163,184,0.18)",
-            background:
-              "linear-gradient(180deg, rgba(2,6,23,0.62), rgba(15,23,42,0.55))",
-            boxShadow: "0 20px 60px rgba(0,0,0,0.35)",
-          }}
-        >
-          <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
-            <img
-              src={logo}
-              alt="Logo BrasilPrag"
-              style={{
-                width: 78,
-                height: 78,
-                borderRadius: 18,
-                objectFit: "cover",
-                boxShadow: "0 18px 50px rgba(0,0,0,0.35)",
-              }}
+        <div style={S.formCard} className="reveal">
+          <div style={S.formTitle}>Dados do orçamento</div>
+
+          <div style={S.formGrid}>
+            <input
+              value={form.nome}
+              onChange={(e) => setForm((p) => ({ ...p, nome: e.target.value }))}
+              placeholder="Seu nome"
+              style={S.input}
             />
-            <div>
-              <div style={{ fontWeight: 900, fontSize: 18 }}>{EMPRESA}</div>
-              <div style={{ color: "rgba(226,232,240,0.7)", marginTop: 4 }}>
-                Dedetização • Desratização • Descupinização
-              </div>
+            <input
+              value={form.praga}
+              onChange={(e) => setForm((p) => ({ ...p, praga: e.target.value }))}
+              placeholder="Qual praga? (barata, rato, cupim...)"
+              style={S.input}
+            />
+            <input
+              value={form.bairro}
+              onChange={(e) => setForm((p) => ({ ...p, bairro: e.target.value }))}
+              placeholder="Bairro / Cidade (ex: Mooca, São Paulo)"
+              style={S.input}
+            />
+
+            <div style={S.twoCols}>
+              <select
+                value={form.tipo}
+                onChange={(e) => setForm((p) => ({ ...p, tipo: e.target.value as TipoImovel }))}
+                style={S.select}
+              >
+                <option>Apartamento</option>
+                <option>Casa</option>
+                <option>Comércio</option>
+                <option>Condomínio</option>
+              </select>
+
+              <select
+                value={form.tamanho}
+                onChange={(e) => setForm((p) => ({ ...p, tamanho: e.target.value as Tamanho }))}
+                style={S.select}
+              >
+                <option>Pequeno</option>
+                <option>Médio</option>
+                <option>Grande</option>
+              </select>
+            </div>
+
+            <select
+              value={form.urgencia}
+              onChange={(e) => setForm((p) => ({ ...p, urgencia: e.target.value as Urgencia }))}
+              style={S.select}
+            >
+              <option>Hoje</option>
+              <option>24h</option>
+              <option>Esta semana</option>
+              <option>Sem pressa</option>
+            </select>
+
+            <a href={waLink(budgetMessage)} target="_blank" rel="noreferrer" style={S.primaryBtnFull}>
+              📱 Enviar orçamento no WhatsApp
+            </a>
+
+            <div style={S.hint}>
+              Atendimento: <b>SP Capital e ABC</b> • CNPJ <b>{CNPJ}</b>
             </div>
           </div>
 
-          <div
-            style={{
-              marginTop: 18,
-              padding: 14,
-              borderRadius: 18,
-              border: "1px solid rgba(34,197,94,0.22)",
-              background: "rgba(34,197,94,0.08)",
-            }}
-          >
-            <div style={{ fontWeight: 900, marginBottom: 6 }}>
-              📍 Áreas atendidas
-            </div>
-            <div style={{ color: "rgba(226,232,240,0.78)", lineHeight: 1.5 }}>
-              São Paulo Capital • ABC Paulista • Santo André • São Bernardo •
-              São Caetano • Diadema • Mauá
-            </div>
+          <div style={S.mapWrap}>
+            <iframe
+              title="Mapa - São Paulo"
+              src="https://www.google.com/maps?q=S%C3%A3o%20Paulo%20SP&output=embed"
+              width="100%"
+              height="280"
+              style={{ border: 0 }}
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+            />
           </div>
 
-          <div
-            style={{
-              marginTop: 14,
-              display: "grid",
-              gap: 10,
-              gridTemplateColumns: "1fr 1fr",
-            }}
-          >
-            {[
-              { title: "Baratas", desc: "Controle e prevenção" },
-              { title: "Ratos", desc: "Controle seguro" },
-              { title: "Cupins", desc: "Tratamento especializado" },
-              { title: "Mosquitos", desc: "Redução e barreiras" },
-            ].map((it) => (
-              <div
-                key={it.title}
-                style={{
-                  padding: 12,
-                  borderRadius: 16,
-                  border: "1px solid rgba(148,163,184,0.16)",
-                  background: "rgba(2,6,23,0.35)",
+          <div style={S.quickRow}>
+            <a href={`tel:${TEL_NUMBER_LINK}`} style={S.quickBtnAlt}>
+              📞 {TEL_NUMBER_DISPLAY}
+            </a>
+            <a href={INSTAGRAM_URL} target="_blank" rel="noreferrer" style={S.quickBtnAlt}>
+              📷 Instagram
+            </a>
+            <a href={waLink(baseMessage)} target="_blank" rel="noreferrer" style={S.quickBtn}>
+              💬 WhatsApp
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer style={S.footer}>
+        <div style={S.footerInner}>
+          <div>
+            © {new Date().getFullYear()} <b>{EMPRESA}</b> • CNPJ {CNPJ}
+          </div>
+          <div style={S.footerLinks}>
+            <a href={`tel:${TEL_NUMBER_LINK}`} style={S.footerLink}>
+              📞 {TEL_NUMBER_DISPLAY}
+            </a>
+            <a href={INSTAGRAM_URL} target="_blank" rel="noreferrer" style={S.footerLink}>
+              📷 Instagram
+            </a>
+            <a href={waLink(baseMessage)} target="_blank" rel="noreferrer" style={S.footerLink}>
+              💬 WhatsApp
+            </a>
+          </div>
+        </div>
+      </footer>
+
+      {/* Floating WhatsApp */}
+      <a href={waLink(baseMessage)} target="_blank" rel="noreferrer" style={S.fab} aria-label="Abrir WhatsApp">
+        💬 WhatsApp
+      </a>
+
+      {/* Mobile bottom CTA bar */}
+      <div style={S.mobileBar}>
+        <a href={`tel:${TEL_NUMBER_LINK}`} style={S.mobileBtnAlt} aria-label="Ligar agora">
+          📞 Ligar
+        </a>
+        <a href={INSTAGRAM_URL} target="_blank" rel="noreferrer" style={S.mobileBtnAlt} aria-label="Instagram">
+          📷 Insta
+        </a>
+        <a href={waLink(baseMessage)} target="_blank" rel="noreferrer" style={S.mobileBtn} aria-label="Orçar no WhatsApp">
+          💬 Orçar no WhatsApp
+        </a>
+      </div>
+
+      {/* CSS embutido: animações s background: "rgba(2,6,23,0.35)",
                 }}
               >
                 <div style={{ fontWeight: 900 }}>{it.title}</div>
