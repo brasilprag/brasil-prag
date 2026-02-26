@@ -35,6 +35,16 @@ const TEL_NUMBER_DISPLAY = "(11) 93278-2539";
 const TEL_NUMBER_LINK = "+5511932782539";
 const INSTAGRAM_URL = "https://www.instagram.com/brasilprag/";
 
+// ✅ Localização fixa (Google)
+const ENDERECO = "Av. Paulista, 1471 - São Paulo - SP";
+const MAPS_DESTINO = "Av.+Paulista,+1471,+S%C3%A3o+Paulo+-+SP";
+const MAPS_DIRECTIONS_URL = `https://www.google.com/maps/dir/?api=1&destination=${MAPS_DESTINO}`;
+const MAPS_PLACE_URL = `https://www.google.com/maps/search/?api=1&query=${MAPS_DESTINO}`;
+// iframe sem API key:
+const MAP_EMBED_URL = `https://www.google.com/maps?q=${encodeURIComponent(
+  ENDERECO
+)}&output=embed`;
+
 function waLink(message: string) {
   return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
 }
@@ -69,6 +79,20 @@ export default function App() {
     () => `Olá! Quero um orçamento com a ${EMPRESA}. Atendimento em São Paulo/ABC.`,
     []
   );
+
+  // ✅ SEO básico (título + description) sem biblioteca
+  useEffect(() => {
+    document.title = "BrasilPrag Dedetizadora em São Paulo | Atendimento rápido";
+    const desc =
+      "BrasilPrag Dedetizadora em São Paulo e ABC. Chegamos a partir de 20 minutos, retorno em 1 hora, sem cheiro. Preço justo, 1 ano de garantia e parcelamento.";
+    let meta = document.querySelector('meta[name="description"]') as HTMLMetaElement | null;
+    if (!meta) {
+      meta = document.createElement("meta");
+      meta.name = "description";
+      document.head.appendChild(meta);
+    }
+    meta.content = desc;
+  }, []);
 
   const services: Service[] = useMemo(
     () => [
@@ -192,8 +216,34 @@ export default function App() {
     []
   );
 
+  // ✅ Schema LocalBusiness (ajuda SEO local)
+  const jsonLd = useMemo(() => {
+    return {
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      name: EMPRESA,
+      url: typeof window !== "undefined" ? window.location.origin : undefined,
+      telephone: TEL_NUMBER_LINK,
+      address: {
+        "@type": "PostalAddress",
+        streetAddress: "Av. Paulista, 1471",
+        addressLocality: "São Paulo",
+        addressRegion: "SP",
+        addressCountry: "BR",
+      },
+      areaServed: ["São Paulo - SP", "ABC Paulista", "Santo André", "São Bernardo do Campo", "São Caetano do Sul", "Diadema", "Mauá"],
+      sameAs: [INSTAGRAM_URL],
+    };
+  }, []);
+
   return (
     <div style={S.page}>
+      {/* ✅ JSON-LD sem biblioteca */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+
       <header style={S.topbar}>
         <div style={S.topbarInner}>
           <a href="#topo" style={S.brand}>
@@ -266,6 +316,41 @@ export default function App() {
         </div>
       </section>
 
+      {/* ✅ NOVA SEÇÃO: LOCALIZAÇÃO / MAPA */}
+      <section id="localizacao" style={S.wrap}>
+        <div style={S.sectionCard} className="fadeUp">
+          <div style={S.content}>
+            <div style={S.smallTag}>LOCALIZAÇÃO</div>
+            <div style={S.titleBig}>Dedetizadora em São Paulo (SP)</div>
+            <div style={S.text}>
+              Endereço: <strong>{ENDERECO}</strong>
+              <br />
+              Se você buscou <strong>“dedetizadora perto de mim”</strong>, fale com a BrasilPrag:
+              atendimento rápido em São Paulo e região do ABC.
+            </div>
+
+            <div style={S.mapWrap}>
+              <iframe
+                title="Mapa BrasilPrag - Av Paulista 1471"
+                src={MAP_EMBED_URL}
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                style={S.mapIframe}
+              />
+            </div>
+
+            <div style={S.mapBtns}>
+              <a href={MAPS_DIRECTIONS_URL} target="_blank" rel="noreferrer" style={S.ctaBig}>
+                🧭 Como chegar
+              </a>
+              <a href={MAPS_PLACE_URL} target="_blank" rel="noreferrer" style={S.ctaSoft}>
+                📍 Abrir no Google Maps
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {services.map((s) => (
         <ServiceSection key={s.id} service={s} />
       ))}
@@ -307,8 +392,8 @@ export default function App() {
         <a href={INSTAGRAM_URL} target="_blank" rel="noreferrer" style={S.mobileBtnSoft}>
           📷 Insta
         </a>
-        <a href={waLink(baseMessage)} target="_blank" rel="noreferrer" style={S.mobileBtn}>
-          💬 Atendimento via WhatsApp
+        <a href={MAPS_DIRECTIONS_URL} target="_blank" rel="noreferrer" style={S.mobileBtnSoft}>
+          🧭 Rota
         </a>
       </div>
 
@@ -600,6 +685,27 @@ const S: Record<string, React.CSSProperties> = {
     fontSize: 12,
   },
 
+  // ✅ estilos do mapa
+  mapWrap: {
+    marginTop: 12,
+    borderRadius: 18,
+    overflow: "hidden",
+    border: "1px solid rgba(2,6,23,0.10)",
+    background: "#f3f4f6",
+  },
+  mapIframe: {
+    width: "100%",
+    height: 300,
+    border: 0,
+    display: "block",
+  },
+  mapBtns: {
+    marginTop: 10,
+    display: "grid",
+    gridTemplateColumns: "1fr",
+    gap: 10,
+  },
+
   mobileBar: {
     position: "fixed",
     left: 0,
@@ -608,7 +714,7 @@ const S: Record<string, React.CSSProperties> = {
     zIndex: 60,
     padding: 10,
     display: "grid",
-    gridTemplateColumns: "1fr 1fr 1.4fr",
+    gridTemplateColumns: "1fr 1fr 1fr",
     gap: 10,
     background: "rgba(255,255,255,0.92)",
     borderTop: "1px solid rgba(2,6,23,0.08)",
