@@ -22,14 +22,17 @@ const TEL_VIEW = "(11) 93278-2539";
 
 const BANNER = "/assets/banner-topo.png";
 
-// ✅ Atualizado (com Bela Vista)
+// ✅ Seus dados do rodapé
 const ENDERECO = "Av. Paulista, 1471 - Bela Vista - São Paulo - SP";
 const EMAIL = "BrasilPragDedetizadora@gmail.com";
 const CNPJ = "65.332.311/0001-01";
 const DESDE = "2019";
 const ATENDIMENTO = "Atendimento 24hrs";
 
-const MAP = `https://www.google.com/maps?q=${encodeURIComponent(ENDERECO)}&output=embed`;
+const MAP = `https://www.google.com/maps?q=${encodeURIComponent(
+  ENDERECO
+)}&output=embed`;
+
 const ROTA = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(
   ENDERECO
 )}`;
@@ -87,6 +90,48 @@ export default function App() {
 
   return (
     <div className="page">
+      {/* ✅ BOTÕES FLUTUANTES (MEIO DIREITA, VERTICAL) */}
+      <div className="floatingButtons" aria-label="Atalhos flutuantes">
+        <a
+          className="floatingBtn"
+          href={wa(msg)}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="WhatsApp"
+          title="WhatsApp"
+        >
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M20.52 3.48A11.86 11.86 0 0 0 12.06 0C5.5 0 .16 5.34.16 11.9c0 2.1.55 4.14 1.6 5.94L0 24l6.33-1.67a11.86 11.86 0 0 0 5.73 1.46h.01c6.56 0 11.9-5.34 11.9-11.9 0-3.18-1.24-6.17-3.45-8.41Zm-8.46 18.22h-.01a9.89 9.89 0 0 1-5.04-1.38l-.36-.21-3.75.99 1-3.66-.23-.38a9.87 9.87 0 0 1-1.5-5.26c0-5.45 4.44-9.9 9.9-9.9 2.64 0 5.12 1.03 6.99 2.9a9.82 9.82 0 0 1 2.9 7c0 5.46-4.45 9.9-9.9 9.9Zm5.76-7.72c-.31-.16-1.84-.91-2.12-1.02-.28-.1-.49-.16-.7.16-.2.31-.8 1.02-.98 1.23-.18.2-.36.23-.67.08-.31-.16-1.3-.48-2.48-1.54-.92-.82-1.54-1.84-1.72-2.15-.18-.31-.02-.48.13-.64.14-.14.31-.36.47-.54.16-.18.2-.31.31-.52.1-.2.05-.39-.03-.54-.08-.16-.7-1.69-.96-2.31-.25-.6-.5-.52-.7-.53h-.6c-.2 0-.52.08-.8.39-.28.31-1.05 1.03-1.05 2.5s1.08 2.9 1.23 3.1c.16.2 2.12 3.25 5.13 4.56.72.31 1.28.5 1.72.64.72.23 1.38.2 1.9.12.58-.09 1.84-.75 2.1-1.47.26-.72.26-1.33.18-1.47-.08-.14-.28-.23-.6-.39Z" />
+          </svg>
+        </a>
+
+        <a
+          className="floatingBtn"
+          href={ROTA}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Google Maps"
+          title="Maps"
+        >
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7Zm0 9.5A2.5 2.5 0 1 1 12 6a2.5 2.5 0 0 1 0 5.5Z" />
+          </svg>
+        </a>
+
+        <a
+          className="floatingBtn"
+          href={INSTAGRAM}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Instagram"
+          title="Instagram"
+        >
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5Zm10 2H7a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3Zm-5 4.5A5.5 5.5 0 1 1 6.5 12 5.51 5.51 0 0 1 12 8.5Zm0 2A3.5 3.5 0 1 0 15.5 12 3.5 3.5 0 0 0 12 10.5ZM18 6.8a1.2 1.2 0 1 1-1.2 1.2A1.2 1.2 0 0 1 18 6.8Z" />
+          </svg>
+        </a>
+      </div>
+
       {/* MARCA FIXA - topo esquerdo */}
       <a href="#topo" className="brandFixed" aria-label="Voltar ao topo">
         <img src={logo} alt="BrasilPrag" className="brandLogo" />
@@ -162,48 +207,6 @@ export default function App() {
         </div>
       </div>
 
-      {/* ✅ BOTÕES FLUTUANTES (meio do lado direito, vertical) */}
-      <div className="floatingButtons" aria-label="Atalhos flutuantes">
-        <a
-          className="floatingBtn"
-          href={wa(msg)}
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="WhatsApp"
-          title="WhatsApp"
-        >
-          <svg viewBox="0 0 24 24" aria-hidden="true">
-            <path d="M20.52 3.48A11.86 11.86 0 0 0 12.06 0C5.5 0 .16 5.34.16 11.9c0 2.1.55 4.14 1.6 5.94L0 24l6.33-1.67a11.86 11.86 0 0 0 5.73 1.46h.01c6.56 0 11.9-5.34 11.9-11.9 0-3.18-1.24-6.17-3.45-8.41Z" />
-          </svg>
-        </a>
-
-        <a
-          className="floatingBtn"
-          href={ROTA}
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="Google Maps"
-          title="Maps"
-        >
-          <svg viewBox="0 0 24 24" aria-hidden="true">
-            <path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7Z" />
-          </svg>
-        </a>
-
-        <a
-          className="floatingBtn"
-          href={INSTAGRAM}
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="Instagram"
-          title="Instagram"
-        >
-          <svg viewBox="0 0 24 24" aria-hidden="true">
-            <path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5Z" />
-          </svg>
-        </a>
-      </div>
-
       {/* HERO */}
       <section
         id="topo"
@@ -220,12 +223,12 @@ export default function App() {
               <span>PROFISSIONAL</span>
             </h1>
 
-            {/* ✅ TEXTO (A) ATUALIZADO */}
+            {/* ✅ (A) TEXTO ATUALIZADO */}
             <p className="heroDesc">
               Dedetização com atendimento ágil e seguro, com chegada em até 20
-              minutos e liberação do local em apenas 1 hora. Eliminação eficaz
-              de pragas sem odores, com nota fiscal, laudo técnico, garantia de
-              1 a 5 anos e opção de parcelamento no cartão de crédito.
+              minutos e liberação do local em apenas 1 hora. Eliminação eficaz de
+              pragas sem odores, com nota fiscal, laudo técnico, garantia de 1 a
+              5 anos e opção de parcelamento no cartão de crédito.
             </p>
 
             <div className="heroBtns">
@@ -238,7 +241,8 @@ export default function App() {
                 SOLICITAR ORÇAMENTO
               </a>
 
-              {/* ✅ TELEFONE (B) REMOVIDO DO HERO */}
+              {/* ✅ (B) TELEFONE REMOVIDO DO HERO (vai pro rodapé) */}
+              {/* <a className="heroCtaGhost" href={`tel:${TEL}`}>📞 {TEL_VIEW}</a> */}
             </div>
           </div>
         </div>
@@ -422,10 +426,10 @@ export default function App() {
           </div>
 
           <div className="footerBottom">
-            © {new Date().getFullYear()} {EMPRESA}. Todos os direitos reservados.
+            © {new Date().getFullYear()} {EMPRESA}
           </div>
         </div>
       </footer>
     </div>
   );
-                      }
+}
