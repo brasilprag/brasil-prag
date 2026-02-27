@@ -35,7 +35,6 @@ export default function Home() {
 
   return (
     <div className="page">
-      {/* MARCA FIXA - topo esquerdo */}
       <a href="#topo" className="brandFixed" aria-label="Voltar ao topo">
         <img src={logo} alt="BrasilPrag" className="brandLogo" />
         <div className="brandText">
@@ -44,7 +43,6 @@ export default function Home() {
         </div>
       </a>
 
-      {/* AÇÕES FIXAS - topo direito (agora sem os 3 ícones) */}
       <div className="actionsFixed" aria-label="Ações rápidas">
         <div className="actionsRow">
           <a className="btnGlass" href="#servicos">
@@ -75,7 +73,6 @@ export default function Home() {
         </div>
       </div>
 
-      {/* HERO */}
       <section
         id="topo"
         className="hero"
@@ -113,7 +110,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* COMO FUNCIONA */}
       <section id="como" className="wrap">
         <div className="card glassCard">
           <div className="content">
@@ -159,7 +155,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* SERVIÇOS */}
       <section id="servicos" className="wrap">
         <div className="sectionHeader">
           <h2 className="h2">Serviços</h2>
@@ -205,7 +200,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* LOCALIZAÇÃO */}
       <section id="localizacao" className="wrap pb120">
         <div className="card glassCard">
           <div className="content">
@@ -262,4 +256,4 @@ function setMetaDescription(content: string) {
   }
 
   meta.content = content;
-      }
+}
