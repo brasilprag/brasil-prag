@@ -81,7 +81,7 @@ export default function App() {
 
   return (
     <div className="page">
-      {/* ✅ Marca fixa no topo esquerdo (sem faixa) */}
+      {/* MARCA FIXA - topo esquerdo */}
       <a href="#topo" className="brandFixed" aria-label="Voltar ao topo">
         <img src={logo} alt="BrasilPrag" className="brandLogo" />
         <div className="brandText">
@@ -90,7 +90,7 @@ export default function App() {
         </div>
       </a>
 
-      {/* ✅ Botões fixos no topo direito (vidro + hover + premium) */}
+      {/* AÇÕES FIXAS - topo direito */}
       <div className="actionsFixed" aria-label="Ações rápidas">
         <div className="actionsRow">
           <a className="btnGlass" href="#servicos">
@@ -131,6 +131,7 @@ export default function App() {
           >
             💬
           </a>
+
           <a
             className="iconGlass"
             href={ROTA}
@@ -141,6 +142,7 @@ export default function App() {
           >
             🧭
           </a>
+
           <a
             className="iconGlass"
             href={INSTAGRAM}
@@ -198,24 +200,36 @@ export default function App() {
           <div className="content">
             <div className="tag">COMO FUNCIONA</div>
             <h2 className="h2">Processo rápido e seguro</h2>
+            <p className="sectionSub">
+              Atendimento ágil, aplicação segura e garantia por escrito.
+            </p>
 
             <div className="steps">
               <div className="step">
                 <div className="stepN">1</div>
-                Contato
+                Contato e diagnóstico
               </div>
               <div className="step">
                 <div className="stepN">2</div>
-                Orçamento
+                Orçamento rápido
               </div>
               <div className="step">
                 <div className="stepN">3</div>
-                Aplicação
+                Aplicação profissional
               </div>
               <div className="step">
                 <div className="stepN">4</div>
-                Garantia
+                Garantia e suporte
               </div>
+            </div>
+
+            <div className="miniCtas">
+              <a className="glassMini" href="#servicos">
+                Ver serviços
+              </a>
+              <a className="glassMini" href={wa(msg)} target="_blank" rel="noopener noreferrer">
+                Tirar dúvidas no WhatsApp
+              </a>
             </div>
           </div>
         </div>
@@ -248,15 +262,16 @@ export default function App() {
 
                 <div className="serviceActions">
                   <a
-                    className="ctaBig glassCta"
-                    href={wa(`Olá! Quero orçamento para ${s.t}\n📍 Bairro:\n🏠 Tipo de local:`)}
+                    className="glassCta"
+                    href={wa(
+                      `Olá! Quero orçamento para ${s.t}.\n📍 Bairro:\n🏠 Tipo de local:\n`
+                    )}
                     target="_blank"
                     rel="noopener noreferrer"
                   >
                     Orçar agora
                   </a>
-
-                  <a className="ctaMini glassMini" href="#como">
+                  <a className="glassMini" href="#como">
                     Ver processo
                   </a>
                 </div>
@@ -266,7 +281,7 @@ export default function App() {
         </div>
       </section>
 
-      {/* MAPA */}
+      {/* LOCALIZAÇÃO */}
       <section id="localizacao" className="wrap pb120">
         <div className="card glassCard">
           <div className="content">
@@ -287,7 +302,7 @@ export default function App() {
 
             <div className="mapBtns">
               <a
-                className="ctaBig glassCta"
+                className="glassCta"
                 href={ROTA}
                 target="_blank"
                 rel="noopener noreferrer"
@@ -295,7 +310,12 @@ export default function App() {
                 Como Chegar
               </a>
 
-              <a className="ctaMini glassMini" href={wa(msg)} target="_blank" rel="noopener noreferrer">
+              <a
+                className="glassMini"
+                href={wa(msg)}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 Chamar no WhatsApp
               </a>
             </div>
@@ -304,4 +324,4 @@ export default function App() {
       </section>
     </div>
   );
-}
+          }
