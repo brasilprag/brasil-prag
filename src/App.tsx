@@ -2,8 +2,8 @@ import React, { useEffect, useMemo, useRef, useState } from "react";
 import "./App.css";
 import logo from "./logo.png";
 
-// ✅ Fundo do topo
-import bgHero from "./assets/bg.jpg";
+// ✅ REMOVIDO: bgHero (não vamos mais usar fundo blur)
+// import bgHero from "./assets/bg.jpg";
 
 // ✅ Pragas / serviços (SEM mosquito/formiga/aranha)
 import imgRato from "./assets/rato.jpg";
@@ -34,6 +34,9 @@ const WHATSAPP_NUMBER = "5511932782539";
 const TEL_NUMBER_DISPLAY = "(11) 93278-2539";
 const TEL_NUMBER_LINK = "+5511932782539";
 const INSTAGRAM_URL = "https://www.instagram.com/brasilprag/";
+
+// ✅ Banner completo que você já subiu (ajuste se seu caminho for outro)
+const BANNER_SRC = "/assets/banner-topo.png";
 
 // ✅ Localização fixa (Google)
 const ENDERECO = "Av. Paulista, 1471 - São Paulo - SP";
@@ -108,7 +111,6 @@ export default function App() {
         waMessage:
           "Olá! Quero orçamento para DESRATIZAÇÃO (ratos/camundongos) em São Paulo/ABC. Pode me atender?",
       },
-
       {
         id: "dedetizacao-baratas",
         tag: "DEDETIZAÇÃO",
@@ -121,7 +123,6 @@ export default function App() {
         waMessage:
           "Olá! Quero orçamento para DEDETIZAÇÃO contra BARATAS em São Paulo/ABC. Pode me atender?",
       },
-
       {
         id: "percevejo-cama",
         tag: "CONTROLE DE PERCEVEJO DE CAMA",
@@ -134,7 +135,6 @@ export default function App() {
         waMessage:
           "Olá! Quero orçamento para CONTROLE DE PERCEVEJO DE CAMA em São Paulo/ABC. Pode me atender?",
       },
-
       {
         id: "cupins",
         tag: "DESCUPINIZAÇÃO",
@@ -147,7 +147,6 @@ export default function App() {
         waMessage:
           "Olá! Quero orçamento para DESCUPINIZAÇÃO (cupim de solo) em São Paulo/ABC. Pode me atender?",
       },
-
       {
         id: "escorpioes",
         tag: "CONTROLE DE ESCORPIÕES",
@@ -160,7 +159,6 @@ export default function App() {
         waMessage:
           "Olá! Quero orçamento para CONTROLE DE ESCORPIÕES em São Paulo/ABC. Pode me atender?",
       },
-
       {
         id: "pombos",
         tag: "MANEJO DE POMBOS",
@@ -173,7 +171,6 @@ export default function App() {
         waMessage:
           "Olá! Quero orçamento para CONTROLE/MANEJO DE POMBOS em São Paulo/ABC. Pode me atender?",
       },
-
       {
         id: "morcegos",
         tag: "MANEJO DE MORCEGOS",
@@ -186,7 +183,6 @@ export default function App() {
         waMessage:
           "Olá! Quero orçamento para MANEJO/CONTROLE DE MORCEGOS em São Paulo/ABC. Pode me atender?",
       },
-
       {
         id: "pulgas",
         tag: "CONTROLE DE PULGAS",
@@ -199,7 +195,6 @@ export default function App() {
         waMessage:
           "Olá! Quero orçamento para CONTROLE DE PULGAS em São Paulo/ABC. Pode me atender?",
       },
-
       {
         id: "carrapatos",
         tag: "CONTROLE DE CARRAPATOS",
@@ -231,7 +226,15 @@ export default function App() {
         addressRegion: "SP",
         addressCountry: "BR",
       },
-      areaServed: ["São Paulo - SP", "ABC Paulista", "Santo André", "São Bernardo do Campo", "São Caetano do Sul", "Diadema", "Mauá"],
+      areaServed: [
+        "São Paulo - SP",
+        "ABC Paulista",
+        "Santo André",
+        "São Bernardo do Campo",
+        "São Caetano do Sul",
+        "Diadema",
+        "Mauá",
+      ],
       sameAs: [INSTAGRAM_URL],
     };
   }, []);
@@ -244,6 +247,7 @@ export default function App() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
+      {/* ✅ HEADER (menu novo) */}
       <header style={S.topbar}>
         <div style={S.topbarInner}>
           <a href="#topo" style={S.brand}>
@@ -254,70 +258,113 @@ export default function App() {
             </div>
           </a>
 
-          <div style={S.actions}>
+          <nav style={S.actions}>
             <a href={INSTAGRAM_URL} target="_blank" rel="noreferrer" style={S.btnOutline}>
               📷 Instagram
             </a>
-            <a href={`tel:${TEL_NUMBER_LINK}`} style={S.btnOutline}>
-              📞 Ligar agora
+            <a href={MAPS_DIRECTIONS_URL} target="_blank" rel="noreferrer" style={S.btnOutline}>
+              🧭 Como chegar
             </a>
             <a href={waLink(baseMessage)} target="_blank" rel="noreferrer" style={S.btnPrimary}>
               💬 WhatsApp
             </a>
-          </div>
+            <a href="#orcamento" style={S.btnOutline}>
+              🧾 Orçamento
+            </a>
+          </nav>
         </div>
       </header>
 
+      {/* ✅ HERO: Banner completo (imagem) + botões funcionais por cima */}
       <section id="topo" style={S.wrap}>
-        <div style={S.hero} className="fadeUp">
-          <div style={S.heroBgWrap}>
-            <img src={bgHero} alt="" style={S.heroBgImg} />
-            <div style={S.heroOverlay} />
-          </div>
+        <div style={S.bannerCard} className="fadeUp">
+          <img src={BANNER_SRC} alt="BrasilPrag Dedetizadora" style={S.bannerImg} />
 
-          <div style={S.heroContent}>
-            <div style={S.heroKicker}>✅ SP + ABC • CNPJ {CNPJ}</div>
-            <h1 style={S.h1}>Dedetização rápida e sem transtornos</h1>
+          {/* Botão WhatsApp no canto superior direito (funcional) */}
+          <a
+            href={waLink(baseMessage)}
+            target="_blank"
+            rel="noreferrer"
+            style={S.bannerTopRightBtn}
+            aria-label="Chamar no WhatsApp"
+          >
+            💬 WhatsApp
+          </a>
 
-            <div style={S.highlight}>
-              <div style={S.hRow}>
-                <span style={S.pill}>⏱️ Chegamos a partir de 20 minutos</span>
-                <span style={S.pill}>🏠 Você volta em apenas 1 hora</span>
-              </div>
-              <div style={S.hRow}>
-                <span style={S.pill}>🌿 Sem cheiro</span>
-                <span style={S.pill}>💳 Parcelamento no cartão</span>
-              </div>
-              <div style={S.hRow}>
-                <span style={S.pill}>🛡️ 1 ano de garantia</span>
-                <span style={S.pill}>💰 Preço justo</span>
-              </div>
+          {/* Botão “Fale Conosco Agora” (funcional) — ajuste as coordenadas se quiser */}
+          <a
+            href={waLink(baseMessage)}
+            target="_blank"
+            rel="noreferrer"
+            style={S.bannerMainCta}
+          >
+            FALE CONOSCO AGORA
+          </a>
+        </div>
+      </section>
+
+      {/* ✅ ORÇAMENTO NA MESMA PÁGINA */}
+      <section id="orcamento" style={S.wrap}>
+        <div style={S.sectionCard} className="fadeUp">
+          <div style={S.content}>
+            <div style={S.smallTag}>ORÇAMENTO</div>
+            <div style={S.titleBig}>Solicite seu orçamento agora</div>
+            <div style={S.text}>
+              Atendimento rápido em São Paulo e ABC. Clique no WhatsApp e informe o tipo de praga e o local.
             </div>
 
-            <div style={S.heroCtas}>
+            <div style={S.orcamentoBtns}>
               <a href={waLink(baseMessage)} target="_blank" rel="noreferrer" style={S.ctaBig}>
-                Atendimento via WhatsApp
+                💬 Pedir orçamento no WhatsApp
               </a>
-
-              <div style={S.ctaRow}>
-                <a href={`tel:${TEL_NUMBER_LINK}`} style={S.ctaSoft}>
-                  📞 {TEL_NUMBER_DISPLAY}
-                </a>
-                <a href={INSTAGRAM_URL} target="_blank" rel="noreferrer" style={S.ctaSoft}>
-                  📷 Instagram
-                </a>
-              </div>
+              <a href={`tel:${TEL_NUMBER_LINK}`} style={S.ctaSoft}>
+                📞 {TEL_NUMBER_DISPLAY}
+              </a>
             </div>
 
             <div style={S.heroNote}>
-              Atendimento: São Paulo Capital • ABC Paulista • Santo André • São Bernardo • São Caetano • Diadema • Mauá
+              ✅ SP + ABC • CNPJ {CNPJ} • Retorno rápido • Sem cheiro • Preço justo
             </div>
           </div>
         </div>
       </section>
 
-      {/* ✅ NOVA SEÇÃO: LOCALIZAÇÃO / MAPA */}
-      <section id="localizacao" style={S.wrap}>
+      {services.map((s) => (
+        <ServiceSection key={s.id} service={s} />
+      ))}
+
+      <section style={{ ...S.wrap, paddingBottom: 40 }}>
+        <div style={S.sectionCard} className="fadeUp">
+          <div style={S.content}>
+            <div style={S.smallTag}>ANTES E DEPOIS</div>
+            <div style={S.titleBig}>Resultados e segurança</div>
+            <div style={S.text}>
+              Quer ver exemplos reais de antes e depois? A gente te envia no WhatsApp.
+            </div>
+
+            <div style={S.beforeAfterGrid}>
+              <div style={S.beforeBox}>
+                <div style={S.baLabel}>ANTES</div>
+              </div>
+              <div style={S.afterBox}>
+                <div style={S.baLabel}>DEPOIS</div>
+              </div>
+            </div>
+
+            <a
+              href={waLink(`Olá! Pode me enviar exemplos de ANTES e DEPOIS da ${EMPRESA}?`)}
+              target="_blank"
+              rel="noreferrer"
+              style={S.ctaBig}
+            >
+              💬 Pedir Antes e Depois no WhatsApp
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* ✅ MAPA MOVIDO PARA O FINAL */}
+      <section id="localizacao" style={{ ...S.wrap, paddingBottom: 120 }}>
         <div style={S.sectionCard} className="fadeUp">
           <div style={S.content}>
             <div style={S.smallTag}>LOCALIZAÇÃO</div>
@@ -347,40 +394,6 @@ export default function App() {
                 📍 Abrir no Google Maps
               </a>
             </div>
-          </div>
-        </div>
-      </section>
-
-      {services.map((s) => (
-        <ServiceSection key={s.id} service={s} />
-      ))}
-
-      <section style={{ ...S.wrap, paddingBottom: 120 }}>
-        <div style={S.sectionCard} className="fadeUp">
-          <div style={S.content}>
-            <div style={S.smallTag}>ANTES E DEPOIS</div>
-            <div style={S.titleBig}>Resultados e segurança</div>
-            <div style={S.text}>
-              Quer ver exemplos reais de antes e depois? A gente te envia no WhatsApp.
-            </div>
-
-            <div style={S.beforeAfterGrid}>
-              <div style={S.beforeBox}>
-                <div style={S.baLabel}>ANTES</div>
-              </div>
-              <div style={S.afterBox}>
-                <div style={S.baLabel}>DEPOIS</div>
-              </div>
-            </div>
-
-            <a
-              href={waLink(`Olá! Pode me enviar exemplos de ANTES e DEPOIS da ${EMPRESA}?`)}
-              target="_blank"
-              rel="noreferrer"
-              style={S.ctaBig}
-            >
-              💬 Pedir Antes e Depois no WhatsApp
-            </a>
           </div>
         </div>
       </section>
@@ -504,7 +517,8 @@ const S: Record<string, React.CSSProperties> = {
 
   wrap: { maxWidth: 980, margin: "0 auto", padding: "14px 12px" },
 
-  hero: {
+  // ✅ Banner card
+  bannerCard: {
     borderRadius: 22,
     border: "1px solid rgba(2,6,23,0.08)",
     background: "#fff",
@@ -512,99 +526,40 @@ const S: Record<string, React.CSSProperties> = {
     position: "relative",
     boxShadow: "0 14px 45px rgba(2,6,23,0.08)",
   },
-  heroBgWrap: {
+  bannerImg: { width: "100%", height: "auto", display: "block" },
+
+  // ✅ Botão WhatsApp no topo direito (overlay)
+  bannerTopRightBtn: {
     position: "absolute",
-    inset: 0,
-    overflow: "hidden",
-  },
-  heroBgImg: {
-    width: "100%",
-    height: "100%",
-    objectFit: "cover",
-    filter: "blur(1.5px)",
-    transform: "scale(1.05)",
-    opacity: 0.4,
-  },
-  heroOverlay: {
-    position: "absolute",
-    inset: 0,
-    background:
-      "linear-gradient(180deg, rgba(2,6,23,0.72), rgba(2,6,23,0.25) 55%, rgba(255,255,255,0.85) 100%)",
-  },
-  heroContent: { position: "relative", padding: 14 },
-
-  heroKicker: {
-    display: "inline-block",
-    fontWeight: 950,
-    fontSize: 12,
-    color: "rgba(255,255,255,0.92)",
-    background: "rgba(34,197,94,0.16)",
-    border: "1px solid rgba(34,197,94,0.22)",
-    padding: "7px 10px",
-    borderRadius: 999,
-  },
-  h1: {
-    margin: "10px 0 10px",
-    fontSize: 28,
-    letterSpacing: -0.4,
-    lineHeight: 1.1,
-    color: "#ffffff",
-    textShadow: "0 10px 30px rgba(0,0,0,0.35)",
-  },
-
-  highlight: {
-    borderRadius: 18,
-    border: "1px solid rgba(255,255,255,0.18)",
-    background: "rgba(255,255,255,0.06)",
-    padding: 12,
-    backdropFilter: "blur(8px)",
-  },
-  hRow: { display: "flex", gap: 8, flexWrap: "wrap", marginBottom: 8 },
-  pill: {
-    borderRadius: 999,
-    border: "1px solid rgba(255,255,255,0.20)",
-    padding: "8px 10px",
-    fontWeight: 900,
-    fontSize: 12,
-    color: "rgba(255,255,255,0.95)",
-    background: "rgba(2,6,23,0.18)",
-  },
-
-  heroCtas: { marginTop: 12, display: "grid", gap: 10 },
-  ctaBig: {
-    display: "block",
-    textAlign: "left",
-    padding: "16px 16px",
-    borderRadius: 18,
-    background: "#22c55e",
-    color: "#062415",
-    border: "1px solid rgba(34,197,94,0.35)",
-    textDecoration: "none",
-    fontWeight: 950,
-    fontSize: 18,
-    boxShadow: "0 18px 40px rgba(34,197,94,0.18)",
-  },
-  ctaRow: { display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10 },
-  ctaSoft: {
-    display: "block",
-    textAlign: "center",
-    padding: "12px 12px",
-    borderRadius: 16,
-    background: "#fff",
-    color: "#0b1220",
-    border: "1px solid rgba(2,6,23,0.12)",
-    textDecoration: "none",
-    fontWeight: 950,
-  },
-  heroNote: {
-    marginTop: 10,
-    color: "rgba(11,18,32,0.72)",
-    lineHeight: 1.5,
-    fontSize: 13,
-    background: "rgba(255,255,255,0.82)",
-    border: "1px solid rgba(2,6,23,0.08)",
+    right: 14,
+    top: 14,
     padding: "10px 12px",
-    borderRadius: 16,
+    borderRadius: 14,
+    textDecoration: "none",
+    fontWeight: 950,
+    border: "1px solid rgba(34,197,94,0.35)",
+    color: "#062415",
+    background: "#22c55e",
+    boxShadow: "0 14px 30px rgba(34,197,94,0.16)",
+  },
+
+  // ✅ Botão principal em cima do banner (coordenadas ajustáveis)
+  // Se quiser “encaixar” exatamente em cima do botão desenhado na imagem,
+  // é só mexer em left/top/transform.
+  bannerMainCta: {
+    position: "absolute",
+    left: "10%",
+    top: "58%",
+    transform: "translateY(-50%)",
+    padding: "14px 18px",
+    borderRadius: 12,
+    textDecoration: "none",
+    fontWeight: 950,
+    color: "#ffffff",
+    background: "rgba(230,126,34,0.95)",
+    border: "1px solid rgba(0,0,0,0.10)",
+    boxShadow: "0 18px 40px rgba(0,0,0,0.22)",
+    letterSpacing: 0.2,
   },
 
   sectionCard: {
@@ -654,99 +609,14 @@ const S: Record<string, React.CSSProperties> = {
     lineHeight: 1.5,
   },
 
-  beforeAfterGrid: { marginTop: 12, display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10 },
-  beforeBox: {
-    height: 160,
-    borderRadius: 18,
-    border: "1px solid rgba(2,6,23,0.10)",
-    background:
-      "radial-gradient(260px 160px at 25% 35%, rgba(239,68,68,0.18), rgba(255,255,255,0) 60%), #fff",
-    position: "relative",
-    overflow: "hidden",
-  },
-  afterBox: {
-    height: 160,
-    borderRadius: 18,
-    border: "1px solid rgba(34,197,94,0.20)",
-    background:
-      "radial-gradient(260px 160px at 25% 35%, rgba(34,197,94,0.18), rgba(255,255,255,0) 60%), #fff",
-    position: "relative",
-    overflow: "hidden",
-  },
-  baLabel: {
-    position: "absolute",
-    top: 12,
-    left: 12,
-    padding: "7px 10px",
-    borderRadius: 999,
-    border: "1px solid rgba(2,6,23,0.10)",
-    background: "rgba(255,255,255,0.90)",
-    fontWeight: 950,
-    fontSize: 12,
-  },
-
-  // ✅ estilos do mapa
-  mapWrap: {
-    marginTop: 12,
-    borderRadius: 18,
-    overflow: "hidden",
-    border: "1px solid rgba(2,6,23,0.10)",
-    background: "#f3f4f6",
-  },
-  mapIframe: {
-    width: "100%",
-    height: 300,
-    border: 0,
+  ctaBig: {
     display: "block",
-  },
-  mapBtns: {
-    marginTop: 10,
-    display: "grid",
-    gridTemplateColumns: "1fr",
-    gap: 10,
-  },
-
-  mobileBar: {
-    position: "fixed",
-    left: 0,
-    right: 0,
-    bottom: 0,
-    zIndex: 60,
-    padding: 10,
-    display: "grid",
-    gridTemplateColumns: "1fr 1fr 1fr",
-    gap: 10,
-    background: "rgba(255,255,255,0.92)",
-    borderTop: "1px solid rgba(2,6,23,0.08)",
-    backdropFilter: "blur(10px)",
-  },
-  mobileBtnSoft: {
-    textAlign: "center",
-    padding: "12px 10px",
-    borderRadius: 16,
-    background: "#fff",
-    border: "1px solid rgba(2,6,23,0.12)",
-    textDecoration: "none",
-    fontWeight: 950,
-    color: "#0b1220",
-  },
-  mobileBtn: {
-    textAlign: "center",
-    padding: "12px 10px",
-    borderRadius: 16,
+    textAlign: "left",
+    padding: "16px 16px",
+    borderRadius: 18,
     background: "#22c55e",
-    border: "1px solid rgba(34,197,94,0.30)",
+    color: "#062415",
+    border: "1px solid rgba(34,197,94,0.35)",
     textDecoration: "none",
     fontWeight: 950,
-    color: "#062415",
-    boxShadow: "0 18px 40px rgba(34,197,94,0.18)",
-  },
-};
-
-const css = `
-.fadeUp { animation: fadeUp 520ms ease-out both; }
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(10px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-`;
+    fontSize: 
