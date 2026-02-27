@@ -34,51 +34,15 @@ function wa(msg: string) {
 }
 
 const services = [
-  {
-    t: "Ratos",
-    i: imgRato,
-    d: "Controle e barreira química para reduzir o retorno e evitar novas entradas.",
-  },
-  {
-    t: "Baratas",
-    i: imgBarata,
-    d: "Tratamento com foco em ninhos e pontos críticos, ajudando a interromper o ciclo reprodutivo.",
-  },
-  {
-    t: "Percevejos",
-    i: imgPercevejo,
-    d: "Identificação de focos e aplicação dirigida com segurança para ambientes residenciais e comerciais.",
-  },
-  {
-    t: "Cupins",
-    i: imgCupim,
-    d: "Inspeção técnica e controle conforme o tipo de infestação (madeira seca/subterrâneo).",
-  },
-  {
-    t: "Escorpiões",
-    i: imgEscorpiao,
-    d: "Controle integrado com orientação preventiva e foco em áreas de risco.",
-  },
-  {
-    t: "Pombos",
-    i: imgPombo,
-    d: "Orientação e soluções para reduzir abrigo e acesso, com medidas preventivas.",
-  },
-  {
-    t: "Morcegos",
-    i: imgMorcego,
-    d: "Avaliação do local e orientação para controle seguro e medidas de vedação.",
-  },
-  {
-    t: "Pulgas",
-    i: imgPulga,
-    d: "Tratamento do ambiente com foco em pontos de permanência e prevenção de reinfestação.",
-  },
-  {
-    t: "Carrapatos",
-    i: imgCarrapato,
-    d: "Controle em áreas internas/externas com recomendações para rotina de prevenção.",
-  },
+  { t: "Ratos", i: imgRato, d: "Controle e barreira química para reduzir o retorno e evitar novas entradas." },
+  { t: "Baratas", i: imgBarata, d: "Tratamento com foco em ninhos e pontos críticos, ajudando a interromper o ciclo." },
+  { t: "Percevejos", i: imgPercevejo, d: "Identificação de focos e aplicação dirigida com segurança." },
+  { t: "Cupins", i: imgCupim, d: "Inspeção técnica e controle conforme o tipo de infestação." },
+  { t: "Escorpiões", i: imgEscorpiao, d: "Controle integrado com orientação preventiva e foco em áreas de risco." },
+  { t: "Pombos", i: imgPombo, d: "Soluções preventivas para reduzir abrigo e acesso." },
+  { t: "Morcegos", i: imgMorcego, d: "Avaliação do local e medidas de vedação/orientação segura." },
+  { t: "Pulgas", i: imgPulga, d: "Tratamento do ambiente e prevenção de reinfestação." },
+  { t: "Carrapatos", i: imgCarrapato, d: "Controle em áreas internas/externas com recomendações preventivas." },
 ];
 
 export default function App() {
@@ -98,6 +62,22 @@ export default function App() {
 
   return (
     <div className="page">
+      {/* FAIXA DE CREDIBILIDADE */}
+      <div className="trustBar" role="note" aria-label="Informações de credibilidade">
+        <div className="trustBarInner">
+          <div className="trustItems">
+            <span className="trustPill">⏱️ Atendimento 24h</span>
+            <span className="trustPill">🛡️ Garantia de 1 a 5 anos*</span>
+            <span className="trustPill">🧾 Nota Fiscal</span>
+            <span className="trustPill">📄 Laudo / Relatório técnico</span>
+            <span className="trustPill">✅ Conformidade sanitária</span>
+          </div>
+          <a className="trustBarCta" href={wa(msg)} target="_blank" rel="noreferrer">
+            💬 Orçamento rápido
+          </a>
+        </div>
+      </div>
+
       {/* TOPBAR */}
       <header className="topbar topbarOverlay">
         <div className="topbarInner">
@@ -110,21 +90,11 @@ export default function App() {
           </a>
 
           <nav className="nav" aria-label="Navegação">
-            <a className="btnOutline" href="#topo">
-              Início
-            </a>
-            <a className="btnOutline" href="#servicos">
-              Serviços
-            </a>
-            <a className="btnOutline" href="#como-funciona">
-              Como funciona
-            </a>
-            <a className="btnOutline" href="#localizacao">
-              Localização
-            </a>
-            <a className="btnPrimary" href={wa(msg)} target="_blank" rel="noreferrer">
-              💬 WhatsApp
-            </a>
+            <a className="btnOutline" href="#topo">Início</a>
+            <a className="btnOutline" href="#servicos">Serviços</a>
+            <a className="btnOutline" href="#como-funciona">Como funciona</a>
+            <a className="btnOutline" href="#localizacao">Localização</a>
+            <a className="btnPrimary" href={wa(msg)} target="_blank" rel="noreferrer">💬 WhatsApp</a>
           </nav>
         </div>
       </header>
@@ -141,33 +111,28 @@ export default function App() {
             </h1>
 
             <p className="heroDesc">
-              Atendimento rápido em São Paulo e ABC, com orientação técnica e aplicação segura para a sua família,
-              pets e ambiente.
+              Atendimento 24h em São Paulo e ABC, com aplicação técnica, orientação completa e suporte pós-serviço.
             </p>
 
             <div className="heroProof">
-              <div className="heroProofItem">✅ Atendimento com hora marcada</div>
+              <div className="heroProofItem">✅ Agendamento com hora marcada</div>
               <div className="heroProofItem">✅ Produtos profissionais</div>
               <div className="heroProofItem">✅ Garantia por escrito*</div>
             </div>
 
             <div className="heroBtns">
-              <a className="heroCta" href={wa(msg)} target="_blank" rel="noreferrer">
-                SOLICITAR ORÇAMENTO
-              </a>
-              <a className="heroCtaGhost" href={`tel:${TEL}`}>
-                📞 {TEL_VIEW}
-              </a>
+              <a className="heroCta" href={wa(msg)} target="_blank" rel="noreferrer">SOLICITAR ORÇAMENTO</a>
+              <a className="heroCtaGhost" href={`tel:${TEL}`}>📞 {TEL_VIEW}</a>
             </div>
 
             <p className="heroFineprint">
-              *Garantia conforme o serviço contratado e as condições do ambiente (avaliadas na vistoria).
+              *Garantia de 1 a 5 anos conforme o serviço contratado e condições do ambiente avaliadas na vistoria.
             </p>
           </div>
         </div>
       </section>
 
-      {/* CONFIANÇA / DIFERENCIAIS */}
+      {/* DIFERENCIAIS */}
       <section className="wrap" aria-label="Diferenciais">
         <div className="card">
           <div className="content">
@@ -176,34 +141,24 @@ export default function App() {
 
             <div className="grid3">
               <div className="miniCard">
-                <div className="miniTitle">Procedimento técnico</div>
-                <p className="miniText">
-                  Avaliamos o cenário, identificamos focos e aplicamos de forma dirigida para mais eficiência.
-                </p>
+                <div className="miniTitle">Atendimento 24h</div>
+                <p className="miniText">Chamou, respondeu. Priorizamos urgências e agendamos rápido.</p>
               </div>
 
               <div className="miniCard">
-                <div className="miniTitle">Transparência</div>
-                <p className="miniText">
-                  Explicamos o que será feito, tempo de reentrada e cuidados pós-serviço, sem “achismos”.
-                </p>
+                <div className="miniTitle">Nota Fiscal e relatório</div>
+                <p className="miniText">Serviço documentado com orientação e registro do atendimento.</p>
               </div>
 
               <div className="miniCard">
-                <div className="miniTitle">Pós-atendimento</div>
-                <p className="miniText">
-                  Orientações de prevenção e suporte para dúvidas. Garantia por escrito conforme o serviço.
-                </p>
+                <div className="miniTitle">Garantia por escrito</div>
+                <p className="miniText">Garantia de 1 a 5 anos conforme o tipo de tratamento contratado.</p>
               </div>
             </div>
 
             <div className="twoCtas">
-              <a className="ctaBig" href={wa(msg)} target="_blank" rel="noreferrer">
-                💬 Falar com um técnico no WhatsApp
-              </a>
-              <a className="ctaSoft" href="#servicos">
-                Ver serviços
-              </a>
+              <a className="ctaBig" href={wa(msg)} target="_blank" rel="noreferrer">💬 Falar com um técnico</a>
+              <a className="ctaSoft" href="#servicos">Ver serviços</a>
             </div>
           </div>
         </div>
@@ -214,14 +169,14 @@ export default function App() {
         <div className="card">
           <div className="content">
             <div className="tag">COMO FUNCIONA</div>
-            <h2 className="h2">Processo simples, com orientação do início ao fim</h2>
+            <h2 className="h2">Processo simples, com suporte do início ao fim</h2>
 
             <div className="steps">
               <div className="step">
                 <div className="stepN">1</div>
                 <div>
-                  <div className="stepT">Contato e diagnóstico inicial</div>
-                  <p className="stepD">Você envia a praga e o local. Se tiver foto/vídeo, ajuda muito.</p>
+                  <div className="stepT">Contato e diagnóstico</div>
+                  <p className="stepD">Você informa a praga e o local. Foto/vídeo ajuda a fechar o melhor tratamento.</p>
                 </div>
               </div>
 
@@ -229,30 +184,28 @@ export default function App() {
                 <div className="stepN">2</div>
                 <div>
                   <div className="stepT">Orçamento e agendamento</div>
-                  <p className="stepD">Passamos valores e marcamos a visita no melhor dia/horário para você.</p>
+                  <p className="stepD">Passamos valores e marcamos a visita no melhor dia/horário.</p>
                 </div>
               </div>
 
               <div className="step">
                 <div className="stepN">3</div>
                 <div>
-                  <div className="stepT">Aplicação segura</div>
-                  <p className="stepD">Execução com técnica e cuidados. Orientamos tempo de reentrada e pós-serviço.</p>
+                  <div className="stepT">Aplicação técnica</div>
+                  <p className="stepD">Execução segura, com instruções de reentrada e cuidados pós-serviço.</p>
                 </div>
               </div>
 
               <div className="step">
                 <div className="stepN">4</div>
                 <div>
-                  <div className="stepT">Suporte e garantia</div>
-                  <p className="stepD">Você recebe orientações de prevenção e garantia por escrito conforme o serviço.</p>
+                  <div className="stepT">Garantia e suporte</div>
+                  <p className="stepD">Você recebe documentação e suporte para dúvidas conforme o serviço.</p>
                 </div>
               </div>
             </div>
 
-            <a className="ctaBig" href={wa(msg)} target="_blank" rel="noreferrer">
-              💬 Quero fazer um orçamento agora
-            </a>
+            <a className="ctaBig" href={wa(msg)} target="_blank" rel="noreferrer">💬 Quero orçamento agora</a>
           </div>
         </div>
       </section>
@@ -263,7 +216,7 @@ export default function App() {
           <div className="tag">SERVIÇOS</div>
           <h2 className="h2">Tratamentos mais procurados</h2>
           <p className="text">
-            Selecione a praga e fale conosco. Indicamos o melhor tratamento conforme o tipo de infestação e ambiente.
+            Selecione a praga e fale conosco. Indicamos o melhor tratamento conforme a infestação e o ambiente.
           </p>
         </div>
 
@@ -279,86 +232,19 @@ export default function App() {
                 <p className="serviceDesc">{s.d}</p>
 
                 <div className="serviceBtns">
-                  <a className="ctaBig" href={wa(`Olá! Quero orçamento para ${s.t}.\n\n${msg}`)} target="_blank" rel="noreferrer">
+                  <a
+                    className="ctaBig"
+                    href={wa(`Olá! Quero orçamento para ${s.t}.\n\n${msg}`)}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
                     💬 Orçar {s.t}
                   </a>
-                  <a className="ctaSoft" href="#como-funciona">
-                    Como funciona
-                  </a>
+                  <a className="ctaSoft" href="#como-funciona">Como funciona</a>
                 </div>
               </div>
             </div>
           ))}
-        </div>
-      </section>
-
-      {/* GARANTIA / SEGURANÇA */}
-      <section className="wrap" aria-label="Garantia e segurança">
-        <div className="card">
-          <div className="content">
-            <div className="tag">SEGURANÇA E GARANTIA</div>
-            <h2 className="h2">O que você recebe ao contratar a BrasilPrag</h2>
-
-            <div className="checkGrid">
-              <div className="checkItem">✔️ Orientação de reentrada e cuidados pós-serviço</div>
-              <div className="checkItem">✔️ Aplicação técnica e dirigida, conforme o ambiente</div>
-              <div className="checkItem">✔️ Atendimento claro: explicamos o procedimento</div>
-              <div className="checkItem">✔️ Garantia por escrito conforme o serviço contratado</div>
-              <div className="checkItem">✔️ Atendimento residencial e comercial</div>
-              <div className="checkItem">✔️ Agendamento com hora marcada</div>
-            </div>
-
-            <div className="twoCtas">
-              <a className="ctaBig" href={wa(msg)} target="_blank" rel="noreferrer">
-                💬 Falar no WhatsApp
-              </a>
-              <a className="ctaSoft" href={`tel:${TEL}`}>
-                📞 Ligar agora
-              </a>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* FAQ */}
-      <section className="wrap" aria-label="Perguntas frequentes">
-        <div className="card">
-          <div className="content">
-            <div className="tag">FAQ</div>
-            <h2 className="h2">Dúvidas comuns</h2>
-
-            <details className="faq">
-              <summary>Preciso sair de casa durante a aplicação?</summary>
-              <p>
-                Depende do tipo de tratamento e do ambiente. Informamos antes do serviço e orientamos o tempo de reentrada.
-              </p>
-            </details>
-
-            <details className="faq">
-              <summary>É seguro para crianças e pets?</summary>
-              <p>
-                Trabalhamos com aplicação técnica e orientações de segurança. Seguimos recomendações de uso e cuidados pós-serviço.
-              </p>
-            </details>
-
-            <details className="faq">
-              <summary>Em quanto tempo vejo resultado?</summary>
-              <p>
-                Varia conforme a praga e o nível de infestação. Em muitos casos, o controle começa nas primeiras horas/dias.
-              </p>
-            </details>
-
-            <details className="faq">
-              <summary>A garantia é de 1 ano?</summary>
-              <p>
-                A garantia é fornecida por escrito e pode variar conforme o serviço, praga e condições do local. Confirmamos no orçamento.
-              </p>
-            </details>
-
-            <a className="ctaBig" href={wa(msg)} target="_blank" rel="noreferrer">
-              💬 Tirar dúvidas no WhatsApp
-            </a>
-          </div>
         </div>
       </section>
 
@@ -377,17 +263,17 @@ export default function App() {
             </div>
 
             <div className="mapBtns">
-              <a className="ctaBig" href={ROTA} target="_blank" rel="noreferrer">
-                🧭 Como chegar
-              </a>
-              <a className="ctaSoft" href={MAPS} target="_blank" rel="noreferrer">
-                📍 Abrir no Google Maps
-              </a>
+              <a className="ctaBig" href={ROTA} target="_blank" rel="noreferrer">🧭 Como chegar</a>
+              <a className="ctaSoft" href={MAPS} target="_blank" rel="noreferrer">📍 Abrir no Google Maps</a>
             </div>
 
             <div className="trustNote">
-              Atendimento com agendamento • Suporte pós-serviço • Orientação preventiva
+              Atendimento 24h • Garantia 1 a 5 anos* • Nota Fiscal • Relatório técnico
             </div>
+
+            <p className="heroFineprint" style={{ color: "#6b7280" }}>
+              *A garantia varia conforme o serviço contratado e as condições do ambiente.
+            </p>
           </div>
         </div>
       </section>
@@ -402,16 +288,10 @@ export default function App() {
 
       {/* BARRA MOBILE */}
       <div className="mobileBar">
-        <a className="mobileBtnSoft" href={`tel:${TEL}`}>
-          📞 Ligar
-        </a>
-        <a className="mobileBtnSoft" href={INSTAGRAM} target="_blank" rel="noreferrer">
-          📷 Insta
-        </a>
-        <a className="mobileBtnSoft" href={ROTA} target="_blank" rel="noreferrer">
-          🧭 Rota
-        </a>
+        <a className="mobileBtnSoft" href={`tel:${TEL}`}>📞 Ligar</a>
+        <a className="mobileBtnSoft" href={INSTAGRAM} target="_blank" rel="noreferrer">📷 Insta</a>
+        <a className="mobileBtnSoft" href={ROTA} target="_blank" rel="noreferrer">🧭 Rota</a>
       </div>
     </div>
   );
-}
+ }
