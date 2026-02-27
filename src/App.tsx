@@ -109,7 +109,7 @@ function FloatingIcons({ whatsappLink }: { whatsappLink: string }) {
 
 function CityRoute() {
   const { slug } = useParams();
-  return <CityPage slug={slug ?? ""} />;
+  return <CityPage cidade={slug ?? ""} />;
 }
 
 export default function App() {
