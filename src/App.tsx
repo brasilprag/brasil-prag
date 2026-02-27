@@ -20,10 +20,10 @@ const INSTAGRAM = "https://www.instagram.com/brasilprag/";
 const TEL = "+5511932782539";
 const TEL_VIEW = "(11) 93278-2539";
 
-// ✅ banner que você subiu em public/assets/
+// banner em public/assets/banner-topo.png
 const BANNER = "/assets/banner-topo.png";
 
-// ✅ Mapa no final
+// Mapa
 const ENDERECO = "Av. Paulista, 1471 - São Paulo - SP";
 const MAP = `https://www.google.com/maps?q=${encodeURIComponent(ENDERECO)}&output=embed`;
 const ROTA = `https://www.google.com/maps/dir/?api=1&destination=Av.+Paulista,+1471,+S%C3%A3o+Paulo+-+SP`;
@@ -54,8 +54,8 @@ export default function App() {
 
   return (
     <div className="page">
-      {/* TOPO FIXO */}
-      <header className="topbar">
+      {/* TOPO FIXO (por cima do hero) */}
+      <header className="topbar topbarOverlay">
         <div className="topbarInner">
           <a href="#topo" className="brand">
             <img src={logo} alt="BrasilPrag" className="brandLogo" />
@@ -66,55 +66,50 @@ export default function App() {
           </a>
 
           <nav className="nav">
-            <a className="btnOutline" href={INSTAGRAM} target="_blank" rel="noreferrer">
-              📷 Instagram
+            <a className="btnOutline" href="#topo">
+              Início
             </a>
-            <a className="btnOutline" href={ROTA} target="_blank" rel="noreferrer">
-              🧭 Como chegar
+            <a className="btnOutline" href="#servicos">
+              Serviços
+            </a>
+            <a className="btnOutline" href="#orcamento">
+              Orçamento
             </a>
             <a className="btnPrimary" href={wa(msg)} target="_blank" rel="noreferrer">
               💬 WhatsApp
-            </a>
-            <a className="btnOutline" href="#orcamento">
-              🧾 Orçamento
             </a>
           </nav>
         </div>
       </header>
 
-      {/* HERO (BANNER FULL) */}
-<section id="topo" className="hero">
-  <div className="heroInner">
-    <div className="heroLeft">
-      <h1 className="heroTitle">
-        DEDETIZAÇÃO <br />
-        <span>PROFISSIONAL</span>
-      </h1>
+      {/* HERO FULL */}
+      <section id="topo" className="hero" style={{ backgroundImage: `url(${BANNER})` }}>
+        <div className="heroInner">
+          <div className="heroLeft">
+            <div className="heroTag">CONTROLE DE PRAGAS</div>
 
-      <p className="heroDesc">
-        Eliminamos pragas com segurança e eficiência. Atendimento em toda São Paulo e ABC.
-      </p>
+            <h1 className="heroTitle">
+              DEDETIZAÇÃO <br />
+              <span>PROFISSIONAL</span>
+            </h1>
 
-      <a className="heroCta" href={wa(msg)} target="_blank" rel="noreferrer">
-        SOLICITAR ORÇAMENTO
-      </a>
-    </div>
-  </div>
-</section>
+            <p className="heroDesc">
+              Eliminamos pragas com segurança e eficiência. Atendimento rápido em São Paulo e ABC.
+            </p>
 
-          {/* WhatsApp canto superior direito (funcional) */}
-          <a className="bannerTopRightBtn" href={wa(msg)} target="_blank" rel="noreferrer">
-            💬 WhatsApp
-          </a>
-
-          {/* Botão central (funcional) */}
-          <a className="bannerMainCta" href={wa(msg)} target="_blank" rel="noreferrer">
-            FALE CONOSCO AGORA
-          </a>
+            <div className="heroBtns">
+              <a className="heroCta" href={wa(msg)} target="_blank" rel="noreferrer">
+                SOLICITAR ORÇAMENTO
+              </a>
+              <a className="heroCtaGhost" href={`tel:${TEL}`}>
+                📞 {TEL_VIEW}
+              </a>
+            </div>
+          </div>
         </div>
       </section>
 
-      {/* ORÇAMENTO (âncora do menu) */}
+      {/* ORÇAMENTO */}
       <section id="orcamento" className="wrap">
         <div className="card">
           <div className="content">
@@ -136,6 +131,7 @@ export default function App() {
       </section>
 
       {/* SERVIÇOS */}
+      <div id="servicos" />
       {services.map((s, i) => (
         <section key={i} className="wrap">
           <div className="card">
@@ -155,7 +151,7 @@ export default function App() {
         </section>
       ))}
 
-      {/* MAPA NO FINAL */}
+      {/* MAPA */}
       <section className="wrap pb120">
         <div className="card">
           <div className="content">
@@ -166,12 +162,7 @@ export default function App() {
             </p>
 
             <div className="mapWrap">
-              <iframe
-                title="Mapa BrasilPrag"
-                src={MAP}
-                className="mapIframe"
-                loading="lazy"
-              ></iframe>
+              <iframe title="Mapa BrasilPrag" src={MAP} className="mapIframe" loading="lazy" />
             </div>
 
             <div className="mapBtns">
