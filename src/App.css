@@ -89,3 +89,93 @@
   text-align:center;padding:12px 10px;border-radius:16px;background:#fff;
   border:1px solid rgba(2,6,23,.12);text-decoration:none;font-weight:950;color:#0b1220;
 }
+/* HERO FULL WIDTH */
+.hero{
+  min-height: 78vh;
+  width: 100%;
+  background: url("/assets/banner-topo.png") center/cover no-repeat;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+/* escurece o banner para o texto aparecer */
+.hero::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background: linear-gradient(90deg, rgba(0,0,0,.65) 0%, rgba(0,0,0,.35) 55%, rgba(0,0,0,.05) 100%);
+}
+
+.heroInner{
+  position: relative;
+  z-index: 2;
+  width: min(1100px, 100%);
+  margin: 0 auto;
+  padding: 110px 16px 40px; /* espaço por causa do topo fixo */
+}
+
+.heroLeft{
+  width: min(560px, 100%);
+}
+
+.heroTitle{
+  margin: 0 0 10px;
+  color: #fff;
+  font-weight: 900;
+  letter-spacing: .5px;
+  font-size: clamp(34px, 5.5vw, 56px);
+  line-height: 1.02;
+}
+
+.heroTitle span{
+  color: #ff8a00;
+}
+
+.heroDesc{
+  margin: 0 0 18px;
+  color: rgba(255,255,255,.92);
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.heroCta{
+  display: inline-block;
+  background: #ff8a00;
+  color: #fff;
+  text-decoration: none;
+  font-weight: 900;
+  padding: 14px 18px;
+  border-radius: 12px;
+}
+
+/* TOPBAR POR CIMA DO BANNER */
+.topbar{
+  position: fixed; /* se já for fixed, mantém */
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  background: rgba(10, 20, 30, .55);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255,255,255,.12);
+}
+
+.brandName, .brandSub, .nav a{
+  color: #fff;
+}
+
+/* no mobile: menu mais compacto */
+@media (max-width: 900px){
+  .heroInner{ padding-top: 120px; }
+  .nav{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+  .btnOutline, .btnPrimary{
+    justify-content: center;
+    padding: 10px 10px;
+    border-radius: 14px;
+  }
+  }
