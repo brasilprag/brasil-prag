@@ -24,7 +24,9 @@ const BANNER = "/assets/banner-topo.png";
 
 const ENDERECO = "Av. Paulista, 1471 - São Paulo - SP";
 const MAP = `https://www.google.com/maps?q=${encodeURIComponent(ENDERECO)}&output=embed`;
-const ROTA = `https://www.google.com/maps/dir/?api=1&destination=Av.+Paulista,+1471,+S%C3%A3o+Paulo+-+SP`;
+const ROTA = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(
+  ENDERECO
+)}`;
 
 function wa(msg: string) {
   return `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(msg)}`;
@@ -46,21 +48,21 @@ const serviceDesc: Record<string, string> = {
   Ratos:
     "Ratos deixam feromônios no ambiente que atraem outros roedores. Aplicamos calda química que neutraliza esses sinais, desaloja e elimina a infestação, e cria uma barreira química residual impedindo o retorno. Garantia de 1 ano.",
   Baratas:
-    "Baratas espalham ootecas (ovos) pelo local. Nosso tratamento tem efeito de choque que elimina as adultas e ação residual que cria uma barreira química. Também inibe o crescimento das ovas para que não cheguem à fase adulta. Garantia de 1 ano.",
+    "Baratas espalham ootecas (ovos) pelo local. Nosso tratamento tem efeito de choque que elimina as adultas e ação residual com barreira química. Também inibe o crescimento das ovas, evitando que cheguem à fase adulta. Garantia de 1 ano.",
   Cupins:
     "Tratamento com efeito dominó: o produto se espalha pela colônia, contaminando todos até atingir a rainha. Forma barreira química duradoura contra reinfestação. Garantia de 5 anos.",
   Percevejos:
-    "Aplicação técnica com efeito de choque e ação residual, interrompendo o ciclo da infestação e formando barreira química preventiva. Garantia de 1 ano.",
+    "Aplicação técnica em áreas de abrigo e circulação, com efeito de choque e ação residual para interromper o ciclo da infestação. Barreira química preventiva. Garantia de 1 ano.",
   "Escorpiões":
-    "Tratamento em ralos, frestas e perímetro com ação residual e barreira química, reduzindo abrigo e circulação. Garantia de 1 ano.",
+    "Tratamento direcionado em ralos, frestas e perímetro com ação residual e barreira química, reduzindo abrigo e circulação. Ajuda a controlar insetos que servem de alimento. Garantia de 1 ano.",
   Pombos:
-    "Controle com medidas preventivas e barreiras físicas, reduzindo pouso e permanência em áreas críticas. Garantia de 1 ano.",
+    "Controle e manejo com medidas preventivas e barreiras, reduzindo pouso e permanência em áreas críticas. Solução segura e eficaz. Garantia de 1 ano.",
   Morcegos:
-    "Exclusão e vedação de acessos com solução segura, evitando retorno ao ambiente tratado. Garantia de 1 ano.",
+    "Serviço técnico com exclusão e vedação de acessos, evitando reentrada com segurança. Orientações para correção de pontos de abrigo conforme necessidade. Garantia de 1 ano.",
   Pulgas:
-    "Aplicação com efeito de choque e ação residual, quebrando o ciclo de reinfestação e formando barreira química. Garantia de 1 ano.",
+    "Aplicação com efeito de choque e ação residual para quebrar o ciclo de reinfestação. A barreira química reduz o risco de retorno. Garantia de 1 ano.",
   Carrapatos:
-    "Tratamento com ação de choque e residual, eliminando focos e criando barreira química preventiva. Garantia de 1 ano.",
+    "Tratamento em áreas de circulação e focos com ação de choque e residual. Cria barreira química preventiva e reduz reinfestação. Garantia de 1 ano.",
 };
 
 export default function App() {
@@ -79,32 +81,86 @@ export default function App() {
 
   return (
     <div className="page">
-
-      <a href="#topo" className="brandFixed">
+      {/* ✅ Marca fixa no topo esquerdo (sem faixa) */}
+      <a href="#topo" className="brandFixed" aria-label="Voltar ao topo">
         <img src={logo} alt="BrasilPrag" className="brandLogo" />
-        <div>
+        <div className="brandText">
           <div className="brandName">{EMPRESA}</div>
           <div className="brandSub">{SUBTITULO}</div>
         </div>
       </a>
 
-      <div className="actionsFixed">
+      {/* ✅ Botões fixos no topo direito (vidro + hover + premium) */}
+      <div className="actionsFixed" aria-label="Ações rápidas">
         <div className="actionsRow">
-          <a className="btnOutline" href="#servicos">Serviços</a>
-          <a className="btnOutline" href="#como">Como Funciona</a>
-          <a className="btnOutline" href="#localizacao">Localização</a>
-          <a className="btnOutline" href={INSTAGRAM} target="_blank">Instagram</a>
-          <a className="btnPrimary" href={wa(msg)} target="_blank">WhatsApp</a>
+          <a className="btnGlass" href="#servicos">
+            Serviços
+          </a>
+          <a className="btnGlass" href="#como">
+            Como Funciona
+          </a>
+          <a className="btnGlass" href="#localizacao">
+            Localização
+          </a>
+          <a
+            className="btnGlass"
+            href={INSTAGRAM}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Instagram
+          </a>
+          <a
+            className="btnGlassPrimary"
+            href={wa(msg)}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            WhatsApp
+          </a>
         </div>
 
         <div className="actionsIcons">
-          <a className="floatBtnTop" href={wa(msg)} target="_blank">💬</a>
-          <a className="floatBtnTop" href={ROTA} target="_blank">🧭</a>
-          <a className="floatBtnTop" href={INSTAGRAM} target="_blank">📷</a>
+          <a
+            className="iconGlass"
+            href={wa(msg)}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Falar no WhatsApp"
+            title="WhatsApp"
+          >
+            💬
+          </a>
+          <a
+            className="iconGlass"
+            href={ROTA}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Abrir rota no Maps"
+            title="Como chegar"
+          >
+            🧭
+          </a>
+          <a
+            className="iconGlass"
+            href={INSTAGRAM}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Abrir Instagram"
+            title="Instagram"
+          >
+            📷
+          </a>
         </div>
       </div>
 
-      <section id="topo" className="hero" style={{ backgroundImage: `url(${BANNER})` }}>
+      {/* HERO */}
+      <section
+        id="topo"
+        className="hero"
+        style={{ backgroundImage: `url(${BANNER})` }}
+      >
+        <div className="heroOverlay" />
         <div className="heroInner">
           <div className="heroLeft">
             <div className="heroTag">ATENDIMENTO 24H</div>
@@ -115,11 +171,17 @@ export default function App() {
             </h1>
 
             <p className="heroDesc">
-              Atendimento em São Paulo e ABC com garantia de 1 a 5 anos, nota fiscal e laudo técnico.
+              Atendimento em São Paulo e ABC com garantia de 1 a 5 anos, nota
+              fiscal e laudo técnico.
             </p>
 
             <div className="heroBtns">
-              <a className="heroCta" href={wa(msg)} target="_blank">
+              <a
+                className="heroCta"
+                href={wa(msg)}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 SOLICITAR ORÇAMENTO
               </a>
               <a className="heroCtaGhost" href={`tel:${TEL}`}>
@@ -130,27 +192,116 @@ export default function App() {
         </div>
       </section>
 
+      {/* COMO FUNCIONA */}
+      <section id="como" className="wrap">
+        <div className="card glassCard">
+          <div className="content">
+            <div className="tag">COMO FUNCIONA</div>
+            <h2 className="h2">Processo rápido e seguro</h2>
+
+            <div className="steps">
+              <div className="step">
+                <div className="stepN">1</div>
+                Contato
+              </div>
+              <div className="step">
+                <div className="stepN">2</div>
+                Orçamento
+              </div>
+              <div className="step">
+                <div className="stepN">3</div>
+                Aplicação
+              </div>
+              <div className="step">
+                <div className="stepN">4</div>
+                Garantia
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* SERVIÇOS */}
       <section id="servicos" className="wrap">
+        <div className="sectionHeader">
+          <h2 className="h2">Serviços</h2>
+          <p className="sectionSub">
+            Tratamento profissional com barreira química e garantia.
+          </p>
+        </div>
+
         <div className="servicesGrid">
           {services.map((s, i) => (
-            <div key={i} className="serviceCard">
+            <div key={i} className="serviceCard glassCard">
               <div className="serviceImgWrap">
                 <img src={s.i} alt={s.t} className="serviceImg" />
+                <div className="imgShine" />
               </div>
-
-              <p className="serviceDescText">{serviceDesc[s.t]}</p>
 
               <div className="serviceBody">
                 <h3 className="serviceTitle">{s.t}</h3>
-                <a className="ctaBig" href={wa(`Olá! Quero orçamento para ${s.t}`)} target="_blank">
-                  Orçar
-                </a>
+
+                <p className="serviceDescText">
+                  {serviceDesc[s.t] ??
+                    "Tratamento profissional com efeito de choque, ação residual e barreira química para evitar o retorno. Garantia de 1 ano."}
+                </p>
+
+                <div className="serviceActions">
+                  <a
+                    className="ctaBig glassCta"
+                    href={wa(`Olá! Quero orçamento para ${s.t}\n📍 Bairro:\n🏠 Tipo de local:`)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Orçar agora
+                  </a>
+
+                  <a className="ctaMini glassMini" href="#como">
+                    Ver processo
+                  </a>
+                </div>
               </div>
             </div>
           ))}
         </div>
       </section>
 
+      {/* MAPA */}
+      <section id="localizacao" className="wrap pb120">
+        <div className="card glassCard">
+          <div className="content">
+            <div className="tag">LOCALIZAÇÃO</div>
+            <h2 className="h2">Atendimento em São Paulo e ABC</h2>
+            <p className="sectionSub">{ENDERECO}</p>
+
+            <div className="mapWrap">
+              <iframe
+                src={MAP}
+                className="mapIframe"
+                title="Mapa - BrasilPrag"
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                allowFullScreen
+              />
+            </div>
+
+            <div className="mapBtns">
+              <a
+                className="ctaBig glassCta"
+                href={ROTA}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Como Chegar
+              </a>
+
+              <a className="ctaMini glassMini" href={wa(msg)} target="_blank" rel="noopener noreferrer">
+                Chamar no WhatsApp
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
   );
 }
