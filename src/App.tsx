@@ -43,7 +43,6 @@ const services = [
 ];
 
 export default function App() {
-
   const msg = useMemo(() => {
     return (
       "Olá! Quero um orçamento para dedetização.\n" +
@@ -59,7 +58,6 @@ export default function App() {
 
   return (
     <div className="page">
-
       {/* TOPBAR */}
       <header className="topbar">
         <div className="topbarInner">
@@ -75,7 +73,23 @@ export default function App() {
             <a className="btnOutline" href="#servicos">Serviços</a>
             <a className="btnOutline" href="#como">Como Funciona</a>
             <a className="btnOutline" href="#localizacao">Localização</a>
-            <a className="btnPrimary" href={wa(msg)} target="_blank">
+
+            {/* ✅ Botão Instagram (agora usa a constante INSTAGRAM) */}
+            <a
+              className="btnOutline"
+              href={INSTAGRAM}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Instagram
+            </a>
+
+            <a
+              className="btnPrimary"
+              href={wa(msg)}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               WhatsApp
             </a>
           </nav>
@@ -83,7 +97,11 @@ export default function App() {
       </header>
 
       {/* HERO */}
-      <section id="topo" className="hero" style={{ backgroundImage: `url(${BANNER})` }}>
+      <section
+        id="topo"
+        className="hero"
+        style={{ backgroundImage: `url(${BANNER})` }}
+      >
         <div className="heroInner">
           <div className="heroLeft">
             <div className="heroTag">ATENDIMENTO 24H</div>
@@ -99,7 +117,12 @@ export default function App() {
             </p>
 
             <div className="heroBtns">
-              <a className="heroCta" href={wa(msg)} target="_blank">
+              <a
+                className="heroCta"
+                href={wa(msg)}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 SOLICITAR ORÇAMENTO
               </a>
               <a className="heroCtaGhost" href={`tel:${TEL}`}>
@@ -130,14 +153,19 @@ export default function App() {
       {/* SERVIÇOS */}
       <section id="servicos" className="wrap">
         <div className="servicesGrid">
-          {services.map((s,i)=>(
+          {services.map((s, i) => (
             <div key={i} className="serviceCard">
               <div className="serviceImgWrap">
-                <img src={s.i} alt={s.t} className="serviceImg"/>
+                <img src={s.i} alt={s.t} className="serviceImg" />
               </div>
               <div className="serviceBody">
                 <h3 className="serviceTitle">{s.t}</h3>
-                <a className="ctaBig" href={wa(`Olá! Quero orçamento para ${s.t}`)} target="_blank">
+                <a
+                  className="ctaBig"
+                  href={wa(`Olá! Quero orçamento para ${s.t}`)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   Orçar
                 </a>
               </div>
@@ -153,11 +181,21 @@ export default function App() {
             <h2 className="h2">Localização</h2>
 
             <div className="mapWrap">
-              <iframe src={MAP} className="mapIframe"></iframe>
+              <iframe
+                src={MAP}
+                className="mapIframe"
+                title="Mapa - BrasilPrag"
+                loading="lazy"
+              />
             </div>
 
             <div className="mapBtns">
-              <a className="ctaBig" href={ROTA} target="_blank">
+              <a
+                className="ctaBig"
+                href={ROTA}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 Como Chegar
               </a>
             </div>
@@ -166,9 +204,36 @@ export default function App() {
       </section>
 
       {/* BOTÕES FLUTUANTES */}
-      <a className="floatBtn floatWhats" href={wa(msg)} target="_blank">💬</a>
-      <a className="floatBtn floatRota" href={ROTA} target="_blank">🧭</a>
+      <a
+        className="floatBtn floatWhats"
+        href={wa(msg)}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Falar no WhatsApp"
+      >
+        💬
+      </a>
 
+      <a
+        className="floatBtn floatRota"
+        href={ROTA}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Abrir rota no Maps"
+      >
+        🧭
+      </a>
+
+      {/* ✅ Botão flutuante Instagram */}
+      <a
+        className="floatBtn floatInsta"
+        href={INSTAGRAM}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Abrir Instagram"
+      >
+        📷
+      </a>
     </div>
   );
-}
+            }
