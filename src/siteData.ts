@@ -45,22 +45,13 @@ export const services = [
 ];
 
 export const serviceDesc: Record<string, string> = {
-  Ratos:
-    "Ratos deixam feromônios no ambiente que atraem outros roedores. Aplicamos calda química que neutraliza esses sinais, desaloja e elimina a infestação, e cria uma barreira química residual impedindo o retorno. Garantia de 1 ano.",
-  Baratas:
-    "Baratas espalham ootecas (ovos) pelo local. Nosso tratamento tem efeito de choque que elimina as adultas e ação residual com barreira química. Também inibe o crescimento das ovas, evitando que cheguem à fase adulta. Garantia de 1 ano.",
-  Cupins:
-    "Tratamento com efeito dominó: o produto se espalha pela colônia, contaminando todos até atingir a rainha. Forma barreira química duradoura contra reinfestação. Garantia de 5 anos.",
-  Percevejos:
-    "Aplicação técnica em áreas de abrigo e circulação, com efeito de choque e ação residual para interromper o ciclo da infestação. Barreira química preventiva. Garantia de 1 ano.",
-  "Escorpiões":
-    "Tratamento direcionado em ralos, frestas e perímetro com ação residual e barreira química, reduzindo abrigo e circulação. Ajuda a controlar insetos que servem de alimento. Garantia de 1 ano.",
-  Pombos:
-    "Controle e manejo com medidas preventivas e barreiras, reduzindo pouso e permanência em áreas críticas. Solução segura e eficaz. Garantia de 1 ano.",
-  Morcegos:
-    "Serviço técnico com exclusão e vedação de acessos, evitando reentrada com segurança. Orientações para correção de pontos de abrigo conforme necessidade. Garantia de 1 ano.",
-  Pulgas:
-    "Aplicação com efeito de choque e ação residual para quebrar o ciclo de reinfestação. A barreira química reduz o risco de retorno. Garantia de 1 ano.",
-  Carrapatos:
-    "Tratamento em áreas de circulação e focos com ação de choque e residual. Cria barreira química preventiva e reduz reinfestação. Garantia de 1 ano.",
+  Ratos: "Tratamento profissional com barreira química e garantia de 1 ano.",
+  Baratas: "Tratamento profissional com barreira química e garantia de 1 ano.",
+  Cupins: "Tratamento profissional com efeito dominó. Garantia de 5 anos.",
+  Percevejos: "Aplicação técnica com ação residual. Garantia de 1 ano.",
+  "Escorpiões": "Tratamento direcionado em ralos e frestas.",
+  Pombos: "Controle e manejo com barreiras preventivas.",
+  Morcegos: "Serviço técnico com exclusão e vedação.",
+  Pulgas: "Aplicação com efeito de choque e ação residual.",
+  Carrapatos: "Tratamento com ação preventiva e residual.",
 };
