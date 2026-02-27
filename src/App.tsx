@@ -2,7 +2,6 @@ import React, { useEffect, useMemo } from "react";
 import "./App.css";
 import logo from "./logo.png";
 
-// ✅ imagens dos serviços
 import imgRato from "./assets/rato.jpg";
 import imgBarata from "./assets/barata.jpg";
 import imgPercevejo from "./assets/percevejo.jpg";
@@ -13,254 +12,138 @@ import imgMorcego from "./assets/morcego.jpg";
 import imgPulga from "./assets/pulga.jpg";
 import imgCarrapato from "./assets/carrapato.jpg";
 
-type Service = {
-  id: string;
-  tag: string;
-  title: string;
-  image: string;
-  text: string;
-  disease: string;
-  waMessage: string;
-};
-
 const EMPRESA = "BrasilPrag Dedetizadora";
 const SUBTITULO = "Atendimento em toda São Paulo e ABC";
 
-const WHATSAPP_NUMBER = "5511932782539";
-const TEL_NUMBER_DISPLAY = "(11) 93278-2539";
-const TEL_NUMBER_LINK = "+5511932782539";
-const INSTAGRAM_URL = "https://www.instagram.com/brasilprag/";
+const WHATSAPP = "5511932782539";
+const INSTAGRAM = "https://www.instagram.com/brasilprag/";
+const TEL = "+5511932782539";
+const TEL_VIEW = "(11) 93278-2539";
 
-// ✅ banner que você já subiu
-const BANNER_SRC = "/assets/banner-topo.png";
+const BANNER = "/assets/banner-topo.png";
 
-// ✅ mapa (no final)
 const ENDERECO = "Av. Paulista, 1471 - São Paulo - SP";
-const MAPS_DESTINO = "Av.+Paulista,+1471,+S%C3%A3o+Paulo+-+SP";
-const MAPS_DIRECTIONS_URL = `https://www.google.com/maps/dir/?api=1&destination=${MAPS_DESTINO}`;
-const MAPS_PLACE_URL = `https://www.google.com/maps/search/?api=1&query=${MAPS_DESTINO}`;
-const MAP_EMBED_URL = `https://www.google.com/maps?q=${encodeURIComponent(ENDERECO)}&output=embed`;
+const MAP = `https://www.google.com/maps?q=${encodeURIComponent(ENDERECO)}&output=embed`;
+const ROTA = `https://www.google.com/maps/dir/?api=1&destination=Av.+Paulista,+1471,+São+Paulo`;
 
-function waLink(message: string) {
-  return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+function wa(msg:string){
+  return `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(msg)}`;
 }
 
-const services: Service[] = [
-  {
-    id: "desratizacao",
-    tag: "DESRATIZAÇÃO",
-    title: "Chega de ratos e camundongos",
-    image: imgRato,
-    text: "Tratamento seguro e eficiente para eliminar roedores e prevenir retorno.",
-    disease: "⚠️ Podem transmitir leptospirose (urina/fezes).",
-    waMessage: "Olá! Quero orçamento para DESRATIZAÇÃO (ratos/camundongos) em São Paulo/ABC.",
-  },
-  {
-    id: "baratas",
-    tag: "DEDETIZAÇÃO",
-    title: "Baratas: eliminação rápida e sem cheiro",
-    image: imgBarata,
-    text: "Aplicação direcionada para eliminar focos em casas, aptos, comércios e condomínios.",
-    disease: "⚠️ Podem contaminar superfícies e alimentos.",
-    waMessage: "Olá! Quero orçamento para DEDETIZAÇÃO contra BARATAS em São Paulo/ABC.",
-  },
-  {
-    id: "percevejo",
-    tag: "PERCEVEJO DE CAMA",
-    title: "Sem mais picadas e noites ruins",
-    image: imgPercevejo,
-    text: "Controle completo com orientação para evitar reinfestação.",
-    disease: "ℹ️ Causa coceira, alergias e estresse.",
-    waMessage: "Olá! Quero orçamento para CONTROLE DE PERCEVEJO DE CAMA em São Paulo/ABC.",
-  },
-  {
-    id: "cupins",
-    tag: "DESCUPINIZAÇÃO",
-    title: "Cupim de solo: eliminação da colônia",
-    image: imgCupim,
-    text: "Tratamento profissional para eliminar a colônia e proteger o ambiente.",
-    disease: "⚠️ Não transmitem doenças, mas causam prejuízo estrutural.",
-    waMessage: "Olá! Quero orçamento para DESCUPINIZAÇÃO (cupim de solo) em São Paulo/ABC.",
-  },
-  {
-    id: "escorpioes",
-    tag: "ESCORPIÕES",
-    title: "Controle e prevenção",
-    image: imgEscorpiao,
-    text: "Atuação rápida e preventiva com orientação de manejo do ambiente.",
-    disease: "⚠️ Podem causar acidentes graves.",
-    waMessage: "Olá! Quero orçamento para CONTROLE DE ESCORPIÕES em São Paulo/ABC.",
-  },
-  {
-    id: "pombos",
-    tag: "MANEJO",
-    title: "Controle e manejo de pombos",
-    image: imgPombo,
-    text: "Medidas para reduzir pouso e permanência com orientação e exclusão.",
-    disease: "⚠️ Fezes podem contaminar áreas e trazer riscos.",
-    waMessage: "Olá! Quero orçamento para MANEJO/CONTROLE DE POMBOS em São Paulo/ABC.",
-  },
-  {
-    id: "morcegos",
-    tag: "MANEJO",
-    title: "Morcegos: controle com segurança",
-    image: imgMorcego,
-    text: "Medidas de exclusão e orientação para reduzir acesso e permanência.",
-    disease: "⚠️ Podem representar risco (ex.: raiva).",
-    waMessage: "Olá! Quero orçamento para MANEJO/CONTROLE DE MORCEGOS em São Paulo/ABC.",
-  },
-  {
-    id: "pulgas",
-    tag: "CONTROLE",
-    title: "Pulgas: controle para casa e pets",
-    image: imgPulga,
-    text: "Tratamos o ambiente e orientamos para quebrar o ciclo (ovo/larva/adulto).",
-    disease: "⚠️ Podem causar alergias e transmitir doenças.",
-    waMessage: "Olá! Quero orçamento para CONTROLE DE PULGAS em São Paulo/ABC.",
-  },
-  {
-    id: "carrapatos",
-    tag: "CONTROLE",
-    title: "Carrapatos: atenção redobrada",
-    image: imgCarrapato,
-    text: "Controle do ambiente + orientação preventiva (quintais e áreas com pets).",
-    disease: "⚠️ Podem transmitir doenças.",
-    waMessage: "Olá! Quero orçamento para CONTROLE DE CARRAPATOS em São Paulo/ABC.",
-  },
+const services = [
+  {t:"Ratos",i:imgRato},
+  {t:"Baratas",i:imgBarata},
+  {t:"Percevejos",i:imgPercevejo},
+  {t:"Cupins",i:imgCupim},
+  {t:"Escorpiões",i:imgEscorpiao},
+  {t:"Pombos",i:imgPombo},
+  {t:"Morcegos",i:imgMorcego},
+  {t:"Pulgas",i:imgPulga},
+  {t:"Carrapatos",i:imgCarrapato},
 ];
 
 export default function App() {
-  const baseMessage = useMemo(
-    () => `Olá! Quero um orçamento com a ${EMPRESA}. Atendimento em São Paulo/ABC.`,
-    []
-  );
 
-  useEffect(() => {
-    document.title = "BrasilPrag Dedetizadora | Atendimento rápido em SP e ABC";
-  }, []);
+  const msg = useMemo(()=>`Olá! Quero orçamento com a ${EMPRESA}.`,[]);
+
+  useEffect(()=>{
+    document.title="BrasilPrag Dedetizadora";
+  },[]);
 
   return (
-    <div className="page">
-      {/* HEADER */}
-      <header className="topbar">
-        <div className="topbarInner">
-          <a href="#topo" className="brand">
-            <img src={logo} alt="BrasilPrag" className="brandLogo" />
-            <div>
-              <div className="brandName">{EMPRESA}</div>
-              <div className="brandSub">{SUBTITULO}</div>
-            </div>
-          </a>
+  <div className="page">
 
-          <nav className="nav">
-            <a className="btnOutline" href={INSTAGRAM_URL} target="_blank" rel="noreferrer">
-              📷 Instagram
-            </a>
-            <a className="btnOutline" href={MAPS_DIRECTIONS_URL} target="_blank" rel="noreferrer">
-              🧭 Como chegar
-            </a>
-            <a className="btnPrimary" href={waLink(baseMessage)} target="_blank" rel="noreferrer">
-              💬 WhatsApp
-            </a>
-            <a className="btnOutline" href="#orcamento">
-              🧾 Orçamento
-            </a>
-          </nav>
-        </div>
-      </header>
+<header className="topbar">
+<div className="topbarInner">
 
-      {/* TOPO / BANNER */}
-      <section id="topo" className="wrap">
-        <div className="bannerCard">
-          <img src={BANNER_SRC} alt="BrasilPrag Dedetizadora" className="bannerImg" />
+<a href="#topo" className="brand">
+<img src={logo} className="brandLogo"/>
+<div>
+<div className="brandName">{EMPRESA}</div>
+<div className="brandSub">{SUBTITULO}</div>
+</div>
+</a>
 
-          {/* WhatsApp (canto superior direito) */}
-          <a className="bannerTopRightBtn" href={waLink(baseMessage)} target="_blank" rel="noreferrer">
-            💬 WhatsApp
-          </a>
+<nav className="nav">
+<a className="btnOutline" href={INSTAGRAM} target="_blank">📷 Instagram</a>
+<a className="btnOutline" href={ROTA} target="_blank">🧭 Como chegar</a>
+<a className="btnPrimary" href={wa(msg)} target="_blank">💬 WhatsApp</a>
+<a className="btnOutline" href="#orcamento">🧾 Orçamento</a>
+</nav>
 
-          {/* Botão do meio (funcional) */}
-          <a className="bannerMainCta" href={waLink(baseMessage)} target="_blank" rel="noreferrer">
-            FALE CONOSCO AGORA
-          </a>
-        </div>
-      </section>
+</div>
+</header>
 
-      {/* ORÇAMENTO (âncora) */}
-      <section id="orcamento" className="wrap">
-        <div className="card">
-          <div className="content">
-            <div className="tag">ORÇAMENTO</div>
-            <h2 className="h2">Solicite seu orçamento agora</h2>
-            <p className="text">
-              Clique no WhatsApp e informe o tipo de praga e o local. Atendimento rápido em São Paulo e ABC.
-            </p>
+<section id="topo" className="wrap">
+<div className="bannerCard">
+<img src={BANNER} className="bannerImg"/>
 
-            <a className="ctaBig" href={waLink(baseMessage)} target="_blank" rel="noreferrer">
-              💬 Pedir orçamento no WhatsApp
-            </a>
+<a className="bannerTopRightBtn" href={wa(msg)} target="_blank">
+💬 WhatsApp
+</a>
 
-            <a className="ctaSoft" href={`tel:${TEL_NUMBER_LINK}`}>
-              📞 {TEL_NUMBER_DISPLAY}
-            </a>
-          </div>
-        </div>
-      </section>
+<a className="bannerMainCta" href={wa(msg)} target="_blank">
+FALE CONOSCO AGORA
+</a>
 
-      {/* SERVIÇOS */}
-      {services.map((s) => (
-        <section key={s.id} className="wrap">
-          <div className="card">
-            <div className="imgWrap">
-              <img src={s.image} alt={s.title} className="serviceImg" />
-            </div>
+</div>
+</section>
 
-            <div className="content">
-              <div className="tag">{s.tag}</div>
-              <h2 className="h2">{s.title}</h2>
-              <p className="text">{s.text}</p>
-              <div className="disease">{s.disease}</div>
+<section id="orcamento" className="wrap">
+<div className="card">
+<div className="content">
+<div className="tag">ORÇAMENTO</div>
+<h2 className="h2">Solicite seu orçamento</h2>
 
-              <a className="ctaBig" href={waLink(s.waMessage)} target="_blank" rel="noreferrer">
-                Atendimento via WhatsApp
-              </a>
-            </div>
-          </div>
-        </section>
-      ))}
+<a className="ctaBig" href={wa(msg)} target="_blank">
+💬 Pedir orçamento no WhatsApp
+</a>
 
-      {/* MAPA NO FINAL */}
-      <section id="localizacao" className="wrap pb120">
-        <div className="card">
-          <div className="content">
-            <div className="tag">LOCALIZAÇÃO</div>
-            <h2 className="h2">Dedetizadora em São Paulo (SP)</h2>
-            <p className="text">
-              Endereço: <strong>{ENDERECO}</strong>
-            </p>
+<a className="ctaSoft" href={`tel:${TEL}`}>
+📞 {TEL_VIEW}
+</a>
 
-            <div className="mapWrap">
-              <iframe title="Mapa BrasilPrag" src={MAP_EMBED_URL} loading="lazy" className="mapIframe" />
-            </div>
+</div>
+</div>
+</section>
 
-            <div className="mapBtns">
-              <a className="ctaBig" href={MAPS_DIRECTIONS_URL} target="_blank" rel="noreferrer">
-                🧭 Como chegar
-              </a>
-              <a className="ctaSoft" href={MAPS_PLACE_URL} target="_blank" rel="noreferrer">
-                📍 Abrir no Google Maps
-              </a>
-            </div>
-          </div>
-        </div>
-      </section>
+{services.map((s,i)=>(
+<section key={i} className="wrap">
+<div className="card">
+<div className="imgWrap">
+<img src={s.i} className="serviceImg"/>
+</div>
+<div className="content">
+<div className="tag">CONTROLE</div>
+<h2 className="h2">{s.t}</h2>
+<a className="ctaBig" href={wa(msg)} target="_blank">
+Atendimento via WhatsApp
+</a>
+</div>
+</div>
+</section>
+))}
 
-      {/* Barra mobile simples */}
-      <div className="mobileBar">
-        <a className="mobileBtnSoft" href={`tel:${TEL_NUMBER_LINK}`}>📞 Ligar</a>
-        <a className="mobileBtnSoft" href={INSTAGRAM_URL} target="_blank" rel="noreferrer">📷 Insta</a>
-        <a className="mobileBtnSoft" href={MAPS_DIRECTIONS_URL} target="_blank" rel="noreferrer">🧭 Rota</a>
-      </div>
-    </div>
+<section className="wrap pb120">
+<div className="card">
+<div className="content">
+<div className="tag">LOCALIZAÇÃO</div>
+<h2 className="h2">São Paulo</h2>
+
+<div className="mapWrap">
+<iframe src={MAP} className="mapIframe"/>
+</div>
+
+</div>
+</div>
+</section>
+
+<div className="mobileBar">
+<a className="mobileBtnSoft" href={`tel:${TEL}`}>📞</a>
+<a className="mobileBtnSoft" href={INSTAGRAM} target="_blank">📷</a>
+<a className="mobileBtnSoft" href={ROTA} target="_blank">🧭</a>
+</div>
+
+</div>
   );
-    }
+}
