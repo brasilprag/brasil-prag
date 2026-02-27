@@ -1,3 +1,6 @@
+import { useEffect, useMemo } from "react";
+import logo from "../logo.png";
+
 import {
   EMPRESA,
   SUBTITULO,
