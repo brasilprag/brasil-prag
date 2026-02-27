@@ -82,10 +82,25 @@ export default function App() {
         </div>
       </header>
 
-      {/* BANNER */}
-      <section id="topo" className="wrap">
-        <div className="bannerCard">
-          <img src={BANNER} alt="BrasilPrag Dedetizadora" className="bannerImg" />
+      {/* HERO (BANNER FULL) */}
+<section id="topo" className="hero">
+  <div className="heroInner">
+    <div className="heroLeft">
+      <h1 className="heroTitle">
+        DEDETIZAÇÃO <br />
+        <span>PROFISSIONAL</span>
+      </h1>
+
+      <p className="heroDesc">
+        Eliminamos pragas com segurança e eficiência. Atendimento em toda São Paulo e ABC.
+      </p>
+
+      <a className="heroCta" href={wa(msg)} target="_blank" rel="noreferrer">
+        SOLICITAR ORÇAMENTO
+      </a>
+    </div>
+  </div>
+</section>
 
           {/* WhatsApp canto superior direito (funcional) */}
           <a className="bannerTopRightBtn" href={wa(msg)} target="_blank" rel="noreferrer">
