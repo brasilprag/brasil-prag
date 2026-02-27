@@ -1,114 +1,145 @@
-/* ===== Botões flutuantes (meio da lateral direita) ===== */
-.floatingButtons{
-  position: fixed;
-  right: 14px;
-  top: 50%;
-  transform: translateY(-50%);
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  z-index: 9999;
+// APP.TSX COMPLETO AQUI 👇
+
+import { useEffect, useMemo } from "react";
+import "./App.css";
+import logo from "./logo.png";
+
+const EMPRESA = "BrasilPrag Dedetizadora";
+const SUBTITULO = "Atendimento em toda São Paulo e ABC";
+
+const WHATSAPP = "5511932782539";
+const INSTAGRAM = "https://www.instagram.com/brasilprag/";
+const TEL = "+5511932782539";
+const TEL_VIEW = "(11) 93278-2539";
+
+const ENDERECO = "Av. Paulista, 1471 - Bela Vista - São Paulo - SP";
+
+const ROTA = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(
+  ENDERECO
+)}`;
+
+function wa(msg: string) {
+  return `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(msg)}`;
 }
 
-.floatingBtn{
-  width: 54px;
-  height: 54px;
-  border-radius: 999px;
-  display: grid;
-  place-items: center;
-  text-decoration: none;
-  background: rgba(0,0,0,0.55);
-  backdrop-filter: blur(6px);
-  border: 1px solid rgba(255,255,255,0.18);
-}
+export default function App() {
 
-.floatingBtn svg{
-  width: 26px;
-  height: 26px;
-  fill: #fff;
-  display: block;
-}
+  const msg = useMemo(() => {
+    return (
+      "Olá! Quero um orçamento para dedetização.\n" +
+      "📍 Bairro:\n" +
+      "🏠 Tipo de local:\n" +
+      "🐜 Praga:\n"
+    );
+  }, []);
 
-/* ===== Rodapé ===== */
-.footer{
-  padding: 28px 16px 22px;
-}
+  useEffect(() => {
+    document.title = "BrasilPrag Dedetizadora | São Paulo e ABC";
+  }, []);
 
-.footerInner{
-  max-width: 1100px;
-  margin: 0 auto;
-  border-radius: 18px;
-  padding: 18px;
-  background: rgba(0,0,0,0.35);
-  border: 1px solid rgba(255,255,255,0.12);
-  backdrop-filter: blur(10px);
-}
+  return (
+    <div className="page">
 
-.footerBrand{
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin-bottom: 14px;
-}
+{/* ================= BOTÕES FLUTUANTES ================= */}
 
-.footerLogo{
-  width: 46px;
-  height: 46px;
-  object-fit: contain;
-}
+<div className="floatingButtons">
 
-.footerTitle{
-  font-weight: 700;
-}
+<a className="floatingBtn" href={wa(msg)} target="_blank">
+<svg viewBox="0 0 24 24">
+<path d="M20.52 3.48A11.86 11.86 0 0 0 12.06 0C5.5 0 .16 5.34.16 11.9c0 2.1.55 4.14 1.6 5.94L0 24l6.33-1.67a11.86 11.86 0 0 0 5.73 1.46h.01c6.56 0 11.9-5.34 11.9-11.9 0-3.18-1.24-6.17-3.45-8.41Z"/>
+</svg>
+</a>
 
-.footerSub{
-  opacity: 0.85;
-  font-size: 0.95rem;
-}
+<a className="floatingBtn" href={ROTA} target="_blank">
+<svg viewBox="0 0 24 24">
+<path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7Z"/>
+</svg>
+</a>
 
-.footerGrid{
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 14px;
-}
+<a className="floatingBtn" href={INSTAGRAM} target="_blank">
+<svg viewBox="0 0 24 24">
+<path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5Z"/>
+</svg>
+</a>
 
-.footerCol{
-  padding: 12px;
-  border-radius: 14px;
-  background: rgba(255,255,255,0.06);
-  border: 1px solid rgba(255,255,255,0.10);
-}
+</div>
 
-.footerLabel{
-  font-weight: 700;
-  margin-bottom: 8px;
-}
+{/* ================= HERO ================= */}
 
-.footerText{
-  opacity: 0.9;
-  margin: 6px 0;
-}
+<section className="hero">
+<div className="heroInner">
+<div className="heroLeft">
 
-.footerLink{
-  display: block;
-  color: inherit;
-  text-decoration: none;
-  margin: 6px 0;
-}
+<h1 className="heroTitle">
+DEDETIZAÇÃO <br />
+<span>PROFISSIONAL</span>
+</h1>
 
-.footerLink:hover{
-  text-decoration: underline;
-}
+<p className="heroDesc">
+Dedetização com atendimento ágil e seguro, com chegada em até 20 minutos e liberação do local em apenas 1 hora. Eliminação eficaz de pragas sem odores, com nota fiscal, laudo técnico, garantia de 1 a 5 anos e opção de parcelamento no cartão de crédito.
+</p>
 
-.footerBottom{
-  margin-top: 14px;
-  opacity: 0.75;
-  font-size: 0.9rem;
-  text-align: center;
-}
+<a className="heroCta" href={wa(msg)} target="_blank">
+SOLICITAR ORÇAMENTO
+</a>
 
-@media (min-width: 860px){
-  .footerGrid{
-    grid-template-columns: 1fr 1fr 1fr;
-  }
- }
+</div>
+</div>
+</section>
+
+{/* ================= FOOTER ================= */}
+
+<footer className="footer">
+
+<div className="footerInner">
+
+<div className="footerBrand">
+<img src={logo} className="footerLogo" />
+<div>
+<div className="footerTitle">{EMPRESA}</div>
+<div className="footerSub">{SUBTITULO}</div>
+</div>
+</div>
+
+<div className="footerGrid">
+
+<div className="footerCol">
+<div className="footerLabel">Contato</div>
+<a className="footerLink" href={`tel:${TEL}`}>
+📞 {TEL_VIEW}
+</a>
+<a className="footerLink" href="mailto:BrasilPragDedetizadora@gmail.com">
+✉️ BrasilPragDedetizadora@gmail.com
+</a>
+</div>
+
+<div className="footerCol">
+<div className="footerLabel">Atendimento</div>
+<div className="footerText">🕒 Atendimento 24hrs</div>
+<div className="footerText">📄 CNPJ: 65.332.311/0001-01</div>
+<div className="footerText">🏆 Desde 2019</div>
+</div>
+
+<div className="footerCol">
+<div className="footerLabel">Endereço</div>
+<div className="footerText">
+📍 Av. Paulista, 1471 - Bela Vista - São Paulo - SP
+</div>
+<a className="footerLink" href={ROTA} target="_blank">
+🧭 Ver rota no Maps
+</a>
+</div>
+
+</div>
+
+<div className="footerBottom">
+© {new Date().getFullYear()} BrasilPrag Dedetizadora
+</div>
+
+</div>
+
+</footer>
+
+</div>
+  );
+}
