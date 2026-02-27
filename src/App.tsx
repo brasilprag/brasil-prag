@@ -1,5 +1,6 @@
 import { useMemo } from "react";
 import { Routes, Route, Navigate, useParams } from "react-router-dom";
+import type { ComponentType } from "react";
 import "./App.css";
 
 import Home from "./pages/Home";
@@ -107,9 +108,12 @@ function FloatingIcons({ whatsappLink }: { whatsappLink: string }) {
   );
 }
 
+// Wrapper tipado para evitar erro do TS sem precisar mexer no CityPage.tsx
+const CityPageWithCidade = CityPage as unknown as ComponentType<{ cidade: string }>;
+
 function CityRoute() {
-  const { slug } = useParams();
-  return <CityPage cidade={slug ?? ""} />;
+  const { slug } = useParams<{ slug?: string }>();
+  return <CityPageWithCidade cidade={slug ?? ""} />;
 }
 
 export default function App() {
@@ -138,4 +142,4 @@ export default function App() {
       </Routes>
     </>
   );
-                          }
+}
