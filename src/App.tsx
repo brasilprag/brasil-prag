@@ -59,7 +59,7 @@ const serviceDesc: Record<string, string> = {
     "Tratamento com efeito dominó: o produto se espalha pela colônia, contaminando todos até atingir a rainha. Forma barreira química duradoura contra reinfestação. Garantia de 5 anos.",
   Percevejos:
     "Aplicação técnica em áreas de abrigo e circulação, com efeito de choque e ação residual para interromper o ciclo da infestação. Barreira química preventiva. Garantia de 1 ano.",
-  "Escorpiões":
+  Escorpiões:
     "Tratamento direcionado em ralos, frestas e perímetro com ação residual e barreira química, reduzindo abrigo e circulação. Ajuda a controlar insetos que servem de alimento. Garantia de 1 ano.",
   Pombos:
     "Controle e manejo com medidas preventivas e barreiras, reduzindo pouso e permanência em áreas críticas. Solução segura e eficaz. Garantia de 1 ano.",
@@ -83,6 +83,12 @@ export default function App() {
 
   useEffect(() => {
     document.title = "BrasilPrag Dedetizadora | São Paulo e ABC";
+
+    // ✅ Ativa os ícones do Lucide (carregados via script no index.html)
+    requestAnimationFrame(() => {
+      const lucide = (window as any).lucide;
+      if (lucide?.createIcons) lucide.createIcons();
+    });
   }, []);
 
   return (
@@ -135,7 +141,7 @@ export default function App() {
             aria-label="Falar no WhatsApp"
             title="WhatsApp"
           >
-            💬
+            <i data-lucide="message-circle"></i>
           </a>
 
           <a
@@ -146,7 +152,7 @@ export default function App() {
             aria-label="Abrir rota no Maps"
             title="Como chegar"
           >
-            🧭
+            <i data-lucide="map-pin"></i>
           </a>
 
           <a
@@ -157,7 +163,7 @@ export default function App() {
             aria-label="Abrir Instagram"
             title="Instagram"
           >
-            📷
+            <i data-lucide="instagram"></i>
           </a>
         </div>
       </div>
@@ -166,7 +172,7 @@ export default function App() {
       <section
         id="topo"
         className="hero"
-        style={{ backgroundImage: `url(${BANNER})` }} // ✅ corrigido
+        style={{ backgroundImage: `url(${BANNER})` }}
       >
         <div className="heroOverlay" />
         <div className="heroInner">
@@ -192,7 +198,7 @@ export default function App() {
               >
                 SOLICITAR ORÇAMENTO
               </a>
-              <a className="heroCtaGhost" href={`tel:${TEL}` /* ✅ corrigido */}>
+              <a className="heroCtaGhost" href={`tel:${TEL}`}>
                 📞 {TEL_VIEW}
               </a>
             </div>
@@ -275,7 +281,6 @@ export default function App() {
                   <a
                     className="glassCta"
                     href={wa(
-                      // ✅ corrigido: template string
                       `Olá! Quero orçamento para ${s.t}.\n📍 Bairro:\n🏠 Tipo de local:\n`
                     )}
                     target="_blank"
@@ -333,7 +338,4 @@ export default function App() {
             </div>
           </div>
         </div>
-      </section>
-    </div>
-  );
-      }
+      </section
