@@ -1,20 +1,69 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
-  <url>
-    <loc>https://www.brasilpragdedetizadora.com.br/</loc>
-  </url>
+<!-- SITE PRINCIPAL -->
+<url><loc>https://www.brasilpragdedetizadora.com.br/</loc></url>
 
-  <url>
-    <loc>https://www.brasilpragdedetizadora.com.br/cidades/osasco/</loc>
-  </url>
+<!-- ABC -->
+<url><loc>https://www.brasilpragdedetizadora.com.br/cidades/santo-andre/</loc></url>
+<url><loc>https://www.brasilpragdedetizadora.com.br/cidades/sao-bernardo-do-campo/</loc></url>
+<url><loc>https://www.brasilpragdedetizadora.com.br/cidades/sao-caetano-do-sul/</loc></url>
+<url><loc>https://www.brasilpragdedetizadora.com.br/cidades/diadema/</loc></url>
+<url><loc>https://www.brasilpragdedetizadora.com.br/cidades/maua/</loc></url>
+<url><loc>https://www.brasilpragdedetizadora.com.br/cidades/ribeirao-pires/</loc></url>
+<url><loc>https://www.brasilpragdedetizadora.com.br/cidades/rio-grande-da-serra/</loc></url>
 
-  <url>
-    <loc>https://www.brasilpragdedetizadora.com.br/cidades/santo-andre/</loc>
-  </url>
+<!-- GRANDE SP -->
+<url><loc>https://www.brasilpragdedetizadora.com.br/cidades/osasco/</loc></url>
+<url><loc>https://www.brasilpragdedetizadora.com.br/cidades/guarulhos/</loc></url>
+<url><loc>https://www.brasilpragdedetizadora.com.br/cidades/mogi-das-cruzes/</loc></url>
+<url><loc>https://www.brasilpragdedetizadora.com.br/cidades/suzano/</loc></url>
+<url><loc>https://www.brasilpragdedetizadora.com.br/cidades/itaquaquecetuba/</loc></url>
+<url><loc>https://www.brasilpragdedetizadora.com.br/cidades/poa/</loc></url>
+<url><loc>https://www.brasilpragdedetizadora.com.br/cidades/ferraz-de-vasconcelos/</loc></url>
+<url><loc>https://www.brasilpragdedetizadora.com.br/cidades/franco-da-rocha/</loc></url>
+<url><loc>https://www.brasilpragdedetizadora.com.br/cidades/caieiras/</loc></url>
 
-  <url>
-    <loc>https://www.brasilpragdedetizadora.com.br/cidades/itaim-paulista/</loc>
-  </url>
+<!-- ZONA OESTE -->
+<url><loc>https://www.brasilpragdedetizadora.com.br/cidades/barueri/</loc></url>
+<url><loc>https://www.brasilpragdedetizadora.com.br/cidades/carapicuiba/</loc></url>
+<url><loc>https://www.brasilpragdedetizadora.com.br/cidades/itapevi/</loc></url>
+<url><loc>https://www.brasilpragdedetizadora.com.br/cidades/jandira/</loc></url>
+<url><loc>https://www.brasilpragdedetizadora.com.br/cidades/cotia/</loc></url>
+<url><loc>https://www.brasilpragdedetizadora.com.br/cidades/taboao-da-serra/</loc></url>
+<url><loc>https://www.brasilpragdedetizadora.com.br/cidades/embu-das-artes/</loc></url>
+<url><loc>https://www.brasilpragdedetizadora.com.br/cidades/lapa/</loc></url>
+<url><loc>https://www.brasilpragdedetizadora.com.br/cidades/pinheiros/</loc></url>
+<url><loc>https://www.brasilpragdedetizadora.com.br/cidades/butanta/</loc></url>
+<url><loc>https://www.brasilpragdedetizadora.com.br/cidades/vila-sonia/</loc></url>
+
+<!-- ZONA LESTE -->
+<url><loc>https://www.brasilpragdedetizadora.com.br/cidades/itaquera/</loc></url>
+<url><loc>https://www.brasilpragdedetizadora.com.br/cidades/sao-miguel-paulista/</loc></url>
+<url><loc>https://www.brasilpragdedetizadora.com.br/cidades/guaianases/</loc></url>
+<url><loc>https://www.brasilpragdedetizadora.com.br/cidades/penha/</loc></url>
+<url><loc>https://www.brasilpragdedetizadora.com.br/cidades/mooca/</loc></url>
+<url><loc>https://www.brasilpragdedetizadora.com.br/cidades/vila-prudente/</loc></url>
+<url><loc>https://www.brasilpragdedetizadora.com.br/cidades/sapopemba/</loc></url>
+<url><loc>https://www.brasilpragdedetizadora.com.br/cidades/cidade-tiradentes/</loc></url>
+<url><loc>https://www.brasilpragdedetizadora.com.br/cidades/ermelino-matarazzo/</loc></url>
+<url><loc>https://www.brasilpragdedetizadora.com.br/cidades/tatuape/</loc></url>
+<url><loc>https://www.brasilpragdedetizadora.com.br/cidades/itaim-paulista/</loc></url>
+
+<!-- ZONA SUL -->
+<url><loc>https://www.brasilpragdedetizadora.com.br/cidades/santo-amaro/</loc></url>
+<url><loc>https://www.brasilpragdedetizadora.com.br/cidades/campo-limpo/</loc></url>
+<url><loc>https://www.brasilpragdedetizadora.com.br/cidades/capao-redondo/</loc></url>
+<url><loc>https://www.brasilpragdedetizadora.com.br/cidades/morumbi/</loc></url>
+<url><loc>https://www.brasilpragdedetizadora.com.br/cidades/jabaquara/</loc></url>
+<url><loc>https://www.brasilpragdedetizadora.com.br/cidades/ipiranga/</loc></url>
+<url><loc>https://www.brasilpragdedetizadora.com.br/cidades/sacoma/</loc></url>
+
+<!-- ZONA NORTE -->
+<url><loc>https://www.brasilpragdedetizadora.com.br/cidades/santana/</loc></url>
+<url><loc>https://www.brasilpragdedetizadora.com.br/cidades/tucuruvi/</loc></url>
+<url><loc>https://www.brasilpragdedetizadora.com.br/cidades/casa-verde/</loc></url>
+<url><loc>https://www.brasilpragdedetizadora.com.br/cidades/jacana/</loc></url>
+<url><loc>https://www.brasilpragdedetizadora.com.br/cidades/mandaqui/</loc></url>
 
 </urlset>
