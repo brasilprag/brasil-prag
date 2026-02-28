@@ -571,8 +571,8 @@ body{
   .heroInner{ padding-top: 110px; }
 }
 
-@media (max-width: 520px){
+/* ✅ atualizado: 1 coluna no mobile (até 768px) */
+@media (max-width: 768px){
   .servicesGrid{ grid-template-columns: 1fr; }
   .mapIframe{ height: 300px; }
-  }
-  
+    }
