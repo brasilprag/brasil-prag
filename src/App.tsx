@@ -17,23 +17,20 @@ const SUBTITULO = "Atendimento em toda São Paulo e ABC";
 
 const WHATSAPP = "5511932782539";
 const INSTAGRAM = "https://www.instagram.com/brasilprag/";
-const EMAIL = "BrasilPragDedetizadora@gmail.com";
-
 const TEL = "+5511932782539";
 const TEL_VIEW = "(11) 93278-2539";
 
-const CNPJ = "65.332.311/0001-01";
-const DESDE = "2019";
-const RESPONSAVEL_TEC = "FERNANDA MENEZES DE OLIVEIRA";
-const CREA = "5069805663";
-
 const BANNER = "/assets/banner-topo.png";
 
-/** Endereço “de referência” (mostrado no site + usado no maps embed) */
-const ENDERECO = "Av. Paulista, 1471 - Bela Vista - São Paulo - SP";
+const ENDERECO = "Av. Paulista, 1471 – Bela Vista, São Paulo - SP";
 const CEP = "01311-200";
+const EMAIL = "BrasilPragDedetizadora@gmail.com";
 
-// ✅ corrigido: template strings
+const CNPJ = "65.332.311/0001-01";
+const DESDE = "2019";
+const RESPONSAVEL = "FERNANDA MENEZES DE OLIVEIRA";
+const CREA = "5069805663";
+
 const MAP = `https://www.google.com/maps?q=${encodeURIComponent(
   ENDERECO
 )}&output=embed`;
@@ -45,6 +42,68 @@ const ROTA = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComp
 function wa(msg: string) {
   return `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(msg)}`;
 }
+
+/** ✅ Ajuste aqui se quiser: nome + slug (pasta) */
+const CIDADES: Array<{ name: string; slug: string }> = [
+  { name: "Santo André", slug: "santo-andre" },
+  { name: "São Bernardo do Campo", slug: "sao-bernardo-do-campo" },
+  { name: "São Caetano do Sul", slug: "sao-caetano-do-sul" },
+  { name: "Diadema", slug: "diadema" },
+  { name: "Mauá", slug: "maua" },
+  { name: "Ribeirão Pires", slug: "ribeirao-pires" },
+  { name: "Rio Grande da Serra", slug: "rio-grande-da-serra" },
+
+  { name: "Osasco", slug: "osasco" },
+  { name: "Guarulhos", slug: "guarulhos" },
+  { name: "Mogi das Cruzes", slug: "mogi-das-cruzes" },
+  { name: "Suzano", slug: "suzano" },
+  { name: "Itaquaquecetuba", slug: "itaquaquecetuba" },
+  { name: "Poá", slug: "poa" },
+  { name: "Ferraz de Vasconcelos", slug: "ferraz-de-vasconcelos" },
+  { name: "Franco da Rocha", slug: "franco-da-rocha" },
+  { name: "Caieiras", slug: "caieiras" },
+  { name: "Barueri", slug: "barueri" },
+  { name: "Carapicuíba", slug: "carapicuiba" },
+  { name: "Itapevi", slug: "itapevi" },
+  { name: "Jandira", slug: "jandira" },
+  { name: "Cotia", slug: "cotia" },
+  { name: "Taboão da Serra", slug: "taboao-da-serra" },
+  { name: "Embu das Artes", slug: "embu-das-artes" },
+
+  // Zonas / bairros (se você criou páginas)
+  { name: "Zona Leste", slug: "zona-leste" },
+  { name: "Zona Sul", slug: "zona-sul" },
+  { name: "Zona Norte", slug: "zona-norte" },
+  { name: "Zona Oeste", slug: "zona-oeste" },
+
+  { name: "Lapa", slug: "lapa" },
+  { name: "Pinheiros", slug: "pinheiros" },
+  { name: "Butantã", slug: "butanta" },
+  { name: "Vila Sônia", slug: "vila-sonia" },
+  { name: "Itaquera", slug: "itaquera" },
+  { name: "São Miguel", slug: "sao-miguel" },
+  { name: "Itaim Paulista", slug: "itaim-paulista" },
+  { name: "Guaianases", slug: "guaianases" },
+  { name: "Penha", slug: "penha" },
+  { name: "Mooca", slug: "mooca" },
+  { name: "Vila Prudente", slug: "vila-prudente" },
+  { name: "Sapopemba", slug: "sapopemba" },
+  { name: "Cidade Tiradentes", slug: "cidade-tiradentes" },
+  { name: "Ermelino Matarazzo", slug: "ermelino-matarazzo" },
+  { name: "Tatuapé", slug: "tatuape" },
+  { name: "Santo Amaro", slug: "santo-amaro" },
+  { name: "Campo Limpo", slug: "campo-limpo" },
+  { name: "Capão Redondo", slug: "capao-redondo" },
+  { name: "Morumbi", slug: "morumbi" },
+  { name: "Jabaquara", slug: "jabaquara" },
+  { name: "Ipiranga", slug: "ipiranga" },
+  { name: "Sacomã", slug: "sacoma" },
+  { name: "Santana", slug: "santana" },
+  { name: "Tucuruvi", slug: "tucuruvi" },
+  { name: "Casa Verde", slug: "casa-verde" },
+  { name: "Jaçanã", slug: "jacana" },
+  { name: "Mandaqui", slug: "mandaqui" },
+];
 
 const services = [
   { t: "Ratos", i: imgRato },
@@ -67,7 +126,7 @@ const serviceDesc: Record<string, string> = {
     "Tratamento com efeito dominó: o produto se espalha pela colônia, contaminando todos até atingir a rainha. Forma barreira química duradoura contra reinfestação. Garantia de 5 anos.",
   Percevejos:
     "Aplicação técnica em áreas de abrigo e circulação, com efeito de choque e ação residual para interromper o ciclo da infestação. Barreira química preventiva. Garantia de 1 ano.",
-  "Escorpiões":
+  Escorpiões:
     "Tratamento direcionado em ralos, frestas e perímetro com ação residual e barreira química, reduzindo abrigo e circulação. Ajuda a controlar insetos que servem de alimento. Garantia de 1 ano.",
   Pombos:
     "Controle e manejo com medidas preventivas e barreiras, reduzindo pouso e permanência em áreas críticas. Solução segura e eficaz. Garantia de 1 ano.",
@@ -78,70 +137,6 @@ const serviceDesc: Record<string, string> = {
   Carrapatos:
     "Tratamento em áreas de circulação e focos com ação de choque e residual. Cria barreira química preventiva e reduz reinfestação. Garantia de 1 ano.",
 };
-
-const CIDADES: Array<{ slug: string; nome: string }> = [
-  // ABC
-  { slug: "santo-andre", nome: "Santo André" },
-  { slug: "sao-bernardo-do-campo", nome: "São Bernardo do Campo" },
-  { slug: "sao-caetano-do-sul", nome: "São Caetano do Sul" },
-  { slug: "diadema", nome: "Diadema" },
-  { slug: "maua", nome: "Mauá" },
-  { slug: "ribeirao-pires", nome: "Ribeirão Pires" },
-  { slug: "rio-grande-da-serra", nome: "Rio Grande da Serra" },
-
-  // Grande SP
-  { slug: "osasco", nome: "Osasco" },
-  { slug: "guarulhos", nome: "Guarulhos" },
-  { slug: "mogi-das-cruzes", nome: "Mogi das Cruzes" },
-  { slug: "suzano", nome: "Suzano" },
-  { slug: "itaquaquecetuba", nome: "Itaquaquecetuba" },
-  { slug: "poa", nome: "Poá" },
-  { slug: "ferraz-de-vasconcelos", nome: "Ferraz de Vasconcelos" },
-  { slug: "franco-da-rocha", nome: "Franco da Rocha" },
-  { slug: "caieiras", nome: "Caieiras" },
-
-  // Oeste
-  { slug: "barueri", nome: "Barueri" },
-  { slug: "carapicuiba", nome: "Carapicuíba" },
-  { slug: "itapevi", nome: "Itapevi" },
-  { slug: "jandira", nome: "Jandira" },
-  { slug: "cotia", nome: "Cotia" },
-  { slug: "taboao-da-serra", nome: "Taboão da Serra" },
-  { slug: "embu-das-artes", nome: "Embu das Artes" },
-  { slug: "lapa", nome: "Lapa" },
-  { slug: "pinheiros", nome: "Pinheiros" },
-  { slug: "butanta", nome: "Butantã" },
-  { slug: "vila-sonia", nome: "Vila Sônia" },
-
-  // Leste
-  { slug: "itaquera", nome: "Itaquera" },
-  { slug: "sao-miguel-paulista", nome: "São Miguel Paulista" },
-  { slug: "guaianases", nome: "Guaianases" },
-  { slug: "penha", nome: "Penha" },
-  { slug: "mooca", nome: "Mooca" },
-  { slug: "vila-prudente", nome: "Vila Prudente" },
-  { slug: "sapopemba", nome: "Sapopemba" },
-  { slug: "cidade-tiradentes", nome: "Cidade Tiradentes" },
-  { slug: "ermelino-matarazzo", nome: "Ermelino Matarazzo" },
-  { slug: "tatuape", nome: "Tatuapé" },
-  { slug: "itaim-paulista", nome: "Itaim Paulista" },
-
-  // Sul
-  { slug: "santo-amaro", nome: "Santo Amaro" },
-  { slug: "campo-limpo", nome: "Campo Limpo" },
-  { slug: "capao-redondo", nome: "Capão Redondo" },
-  { slug: "morumbi", nome: "Morumbi" },
-  { slug: "jabaquara", nome: "Jabaquara" },
-  { slug: "ipiranga", nome: "Ipiranga" },
-  { slug: "sacoma", nome: "Sacomã" },
-
-  // Norte
-  { slug: "santana", nome: "Santana" },
-  { slug: "tucuruvi", nome: "Tucuruvi" },
-  { slug: "casa-verde", nome: "Casa Verde" },
-  { slug: "jacana", nome: "Jaçanã" },
-  { slug: "mandaqui", nome: "Mandaqui" },
-];
 
 export default function App() {
   const msg = useMemo(() => {
@@ -156,7 +151,7 @@ export default function App() {
   useEffect(() => {
     document.title = "BrasilPrag Dedetizadora | São Paulo e ABC";
 
-    // ✅ Ativa os ícones do Lucide (carregados via script no index.html)
+    // Lucide (script no index.html)
     requestAnimationFrame(() => {
       const lucide = (window as any).lucide;
       if (lucide?.createIcons) lucide.createIcons();
@@ -221,7 +216,7 @@ export default function App() {
             href={ROTA}
             target="_blank"
             rel="noopener noreferrer"
-            aria-label="Abrir rota no Google Maps"
+            aria-label="Abrir rota no Maps"
             title="Como chegar"
           >
             <i data-lucide="map-pin"></i>
@@ -371,7 +366,7 @@ export default function App() {
       </section>
 
       {/* LOCALIZAÇÃO */}
-      <section id="localizacao" className="wrap pb120">
+      <section id="localizacao" className="wrap">
         <div className="card glassCard">
           <div className="content">
             <div className="tag">LOCALIZAÇÃO</div>
@@ -412,40 +407,83 @@ export default function App() {
         </div>
       </section>
 
-      {/* RODAPÉ SEO + INFO */}
-      <footer className="footerSeo" aria-label="Rodapé">
+      {/* ✅ RODAPÉ (cidades + dados) */}
+      <footer className="footer" aria-label="Rodapé">
         <div className="wrap">
-          <h3>Atendemos em toda Grande São Paulo e ABC</h3>
+          <div className="footerCard">
+            <h2 className="footerTitle">Atendemos em toda Grande São Paulo e ABC</h2>
 
-          <div className="footerCities" aria-label="Cidades atendidas">
-            {CIDADES.map((c) => (
-              <a key={c.slug} href={`/cidades/${c.slug}/`}>
-                {c.nome}
-              </a>
-            ))}
+            <div className="citiesGrid" aria-label="Cidades atendidas">
+              {CIDADES.map((c) => (
+                <a
+                  key={c.slug}
+                  className="cityLink"
+                  href={`/cidades/${c.slug}/`}
+                  title={`Dedetizadora em ${c.name}`}
+                >
+                  {c.name}
+                </a>
+              ))}
+            </div>
+
+            <div className="footerDivider" />
+
+            <div className="footerInfo">
+              <div className="footerBrand">
+                <strong>{EMPRESA}</strong>
+                <span>• Atendimento 24h • Desde {DESDE}</span>
+              </div>
+
+              <div className="footerCols">
+                <div className="footerCol">
+                  <div className="footerLabel">Documentos</div>
+                  <div className="footerText">CNPJ: {CNPJ}</div>
+                  <div className="footerText">
+                    Responsável Técnico: {RESPONSAVEL}
+                  </div>
+                  <div className="footerText">CREA: {CREA}</div>
+                </div>
+
+                <div className="footerCol">
+                  <div className="footerLabel">Endereço</div>
+                  <div className="footerText">{ENDERECO}</div>
+                  <div className="footerText">CEP: {CEP}</div>
+                  <a
+                    className="footerLink"
+                    href={ROTA}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Abrir no Google Maps
+                  </a>
+                </div>
+
+                <div className="footerCol">
+                  <div className="footerLabel">Contato</div>
+                  <a className="footerLink" href={`tel:${TEL}`}>
+                    Telefone/WhatsApp: {TEL_VIEW}
+                  </a>
+                  <a className="footerLink" href={`mailto:${EMAIL}`}>
+                    E-mail: {EMAIL}
+                  </a>
+                  <a
+                    className="footerLink"
+                    href={INSTAGRAM}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Instagram
+                  </a>
+                </div>
+              </div>
+
+              <div className="footerCopy">
+                © {new Date().getFullYear()} {EMPRESA}. Todos os direitos reservados.
+              </div>
+            </div>
           </div>
-
-          <p className="footerInfo">
-            <strong>{EMPRESA}</strong> • Atendimento 24h • Desde {DESDE} <br />
-            CNPJ: {CNPJ} <br />
-            Responsável Técnico: {RESPONSAVEL_TEC} • CREA {CREA} <br />
-            Endereço: {ENDERECO} • CEP {CEP} <br />
-            Telefone/WhatsApp:{" "}
-            <a href={`tel:${TEL}`} style={{ color: "inherit" }}>
-              {TEL_VIEW}
-            </a>{" "}
-            • E-mail:{" "}
-            <a
-              href={`mailto:${EMAIL}`}
-              style={{ color: "inherit" }}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              {EMAIL}
-            </a>
-          </p>
         </div>
       </footer>
     </div>
   );
-  }
+   }
