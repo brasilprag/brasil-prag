@@ -17,12 +17,21 @@ const SUBTITULO = "Atendimento em toda São Paulo e ABC";
 
 const WHATSAPP = "5511932782539";
 const INSTAGRAM = "https://www.instagram.com/brasilprag/";
+const EMAIL = "BrasilPragDedetizadora@gmail.com";
+
 const TEL = "+5511932782539";
 const TEL_VIEW = "(11) 93278-2539";
 
+const CNPJ = "65.332.311/0001-01";
+const DESDE = "2019";
+const RESPONSAVEL_TEC = "FERNANDA MENEZES DE OLIVEIRA";
+const CREA = "5069805663";
+
 const BANNER = "/assets/banner-topo.png";
 
-const ENDERECO = "Av. Paulista, 1471 - São Paulo - SP";
+/** Endereço “de referência” (mostrado no site + usado no maps embed) */
+const ENDERECO = "Av. Paulista, 1471 - Bela Vista - São Paulo - SP";
+const CEP = "01311-200";
 
 // ✅ corrigido: template strings
 const MAP = `https://www.google.com/maps?q=${encodeURIComponent(
@@ -34,7 +43,6 @@ const ROTA = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComp
 )}`;
 
 function wa(msg: string) {
-  // ✅ corrigido: template string
   return `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(msg)}`;
 }
 
@@ -59,7 +67,7 @@ const serviceDesc: Record<string, string> = {
     "Tratamento com efeito dominó: o produto se espalha pela colônia, contaminando todos até atingir a rainha. Forma barreira química duradoura contra reinfestação. Garantia de 5 anos.",
   Percevejos:
     "Aplicação técnica em áreas de abrigo e circulação, com efeito de choque e ação residual para interromper o ciclo da infestação. Barreira química preventiva. Garantia de 1 ano.",
-  Escorpiões:
+  "Escorpiões":
     "Tratamento direcionado em ralos, frestas e perímetro com ação residual e barreira química, reduzindo abrigo e circulação. Ajuda a controlar insetos que servem de alimento. Garantia de 1 ano.",
   Pombos:
     "Controle e manejo com medidas preventivas e barreiras, reduzindo pouso e permanência em áreas críticas. Solução segura e eficaz. Garantia de 1 ano.",
@@ -70,6 +78,70 @@ const serviceDesc: Record<string, string> = {
   Carrapatos:
     "Tratamento em áreas de circulação e focos com ação de choque e residual. Cria barreira química preventiva e reduz reinfestação. Garantia de 1 ano.",
 };
+
+const CIDADES: Array<{ slug: string; nome: string }> = [
+  // ABC
+  { slug: "santo-andre", nome: "Santo André" },
+  { slug: "sao-bernardo-do-campo", nome: "São Bernardo do Campo" },
+  { slug: "sao-caetano-do-sul", nome: "São Caetano do Sul" },
+  { slug: "diadema", nome: "Diadema" },
+  { slug: "maua", nome: "Mauá" },
+  { slug: "ribeirao-pires", nome: "Ribeirão Pires" },
+  { slug: "rio-grande-da-serra", nome: "Rio Grande da Serra" },
+
+  // Grande SP
+  { slug: "osasco", nome: "Osasco" },
+  { slug: "guarulhos", nome: "Guarulhos" },
+  { slug: "mogi-das-cruzes", nome: "Mogi das Cruzes" },
+  { slug: "suzano", nome: "Suzano" },
+  { slug: "itaquaquecetuba", nome: "Itaquaquecetuba" },
+  { slug: "poa", nome: "Poá" },
+  { slug: "ferraz-de-vasconcelos", nome: "Ferraz de Vasconcelos" },
+  { slug: "franco-da-rocha", nome: "Franco da Rocha" },
+  { slug: "caieiras", nome: "Caieiras" },
+
+  // Oeste
+  { slug: "barueri", nome: "Barueri" },
+  { slug: "carapicuiba", nome: "Carapicuíba" },
+  { slug: "itapevi", nome: "Itapevi" },
+  { slug: "jandira", nome: "Jandira" },
+  { slug: "cotia", nome: "Cotia" },
+  { slug: "taboao-da-serra", nome: "Taboão da Serra" },
+  { slug: "embu-das-artes", nome: "Embu das Artes" },
+  { slug: "lapa", nome: "Lapa" },
+  { slug: "pinheiros", nome: "Pinheiros" },
+  { slug: "butanta", nome: "Butantã" },
+  { slug: "vila-sonia", nome: "Vila Sônia" },
+
+  // Leste
+  { slug: "itaquera", nome: "Itaquera" },
+  { slug: "sao-miguel-paulista", nome: "São Miguel Paulista" },
+  { slug: "guaianases", nome: "Guaianases" },
+  { slug: "penha", nome: "Penha" },
+  { slug: "mooca", nome: "Mooca" },
+  { slug: "vila-prudente", nome: "Vila Prudente" },
+  { slug: "sapopemba", nome: "Sapopemba" },
+  { slug: "cidade-tiradentes", nome: "Cidade Tiradentes" },
+  { slug: "ermelino-matarazzo", nome: "Ermelino Matarazzo" },
+  { slug: "tatuape", nome: "Tatuapé" },
+  { slug: "itaim-paulista", nome: "Itaim Paulista" },
+
+  // Sul
+  { slug: "santo-amaro", nome: "Santo Amaro" },
+  { slug: "campo-limpo", nome: "Campo Limpo" },
+  { slug: "capao-redondo", nome: "Capão Redondo" },
+  { slug: "morumbi", nome: "Morumbi" },
+  { slug: "jabaquara", nome: "Jabaquara" },
+  { slug: "ipiranga", nome: "Ipiranga" },
+  { slug: "sacoma", nome: "Sacomã" },
+
+  // Norte
+  { slug: "santana", nome: "Santana" },
+  { slug: "tucuruvi", nome: "Tucuruvi" },
+  { slug: "casa-verde", nome: "Casa Verde" },
+  { slug: "jacana", nome: "Jaçanã" },
+  { slug: "mandaqui", nome: "Mandaqui" },
+];
 
 export default function App() {
   const msg = useMemo(() => {
@@ -102,7 +174,7 @@ export default function App() {
         </div>
       </a>
 
-      {/* AÇÕES FIXAS - topo direito */}
+      {/* AÇÕES FIXAS - canto direito (vertical) */}
       <div className="actionsFixed" aria-label="Ações rápidas">
         <div className="actionsRow">
           <a className="btnGlass" href="#servicos">
@@ -149,7 +221,7 @@ export default function App() {
             href={ROTA}
             target="_blank"
             rel="noopener noreferrer"
-            aria-label="Abrir rota no Maps"
+            aria-label="Abrir rota no Google Maps"
             title="Como chegar"
           >
             <i data-lucide="map-pin"></i>
@@ -339,6 +411,41 @@ export default function App() {
           </div>
         </div>
       </section>
+
+      {/* RODAPÉ SEO + INFO */}
+      <footer className="footerSeo" aria-label="Rodapé">
+        <div className="wrap">
+          <h3>Atendemos em toda Grande São Paulo e ABC</h3>
+
+          <div className="footerCities" aria-label="Cidades atendidas">
+            {CIDADES.map((c) => (
+              <a key={c.slug} href={`/cidades/${c.slug}/`}>
+                {c.nome}
+              </a>
+            ))}
+          </div>
+
+          <p className="footerInfo">
+            <strong>{EMPRESA}</strong> • Atendimento 24h • Desde {DESDE} <br />
+            CNPJ: {CNPJ} <br />
+            Responsável Técnico: {RESPONSAVEL_TEC} • CREA {CREA} <br />
+            Endereço: {ENDERECO} • CEP {CEP} <br />
+            Telefone/WhatsApp:{" "}
+            <a href={`tel:${TEL}`} style={{ color: "inherit" }}>
+              {TEL_VIEW}
+            </a>{" "}
+            • E-mail:{" "}
+            <a
+              href={`mailto:${EMAIL}`}
+              style={{ color: "inherit" }}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {EMAIL}
+            </a>
+          </p>
+        </div>
+      </footer>
     </div>
   );
-            }
+  }
