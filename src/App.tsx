@@ -272,13 +272,17 @@ export default function App() {
 
             <div className="heroBtns">
               <a
-                className="heroCta"
-                href={wa(msg)}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                SOLICITAR ORÇAMENTO
-              </a>
+  className="heroCta"
+  href={wa(msg)}
+  onClick={(e) => {
+    e.preventDefault();
+    gtag_report_conversion(wa(msg));
+  }}
+  target="_blank"
+  rel="noopener noreferrer"
+>
+  SOLICITAR ORÇAMENTO
+</a>
               <a className="heroCtaGhost" href={`tel:${TEL}`}>
                 📞 {TEL_VIEW}
               </a>
