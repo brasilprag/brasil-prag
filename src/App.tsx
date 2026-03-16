@@ -276,7 +276,11 @@ export default function App() {
   href={wa(msg)}
   onClick={(e) => {
     e.preventDefault();
-    gtag_report_conversion(wa(msg));
+    // @ts-ignore
+    gtag("event", "conversion", {
+      send_to: "AW-17998499183/BxMrCIv34okcEO-arYZD",
+    });
+    window.open(wa(msg), "_blank", "noopener,noreferrer");
   }}
   target="_blank"
   rel="noopener noreferrer"
