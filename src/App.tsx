@@ -42,7 +42,21 @@ const ROTA = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComp
 function wa(msg: string) {
   return `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(msg)}`;
 }
+function gtag_report_conversion(url: string) {
+  const callback = function () {
+    if (typeof url !== "undefined") {
+      window.location.href = url;
+    }
+  };
 
+  // @ts-ignore
+  gtag("event", "conversion", {
+    send_to: "AW-17998499183/BxMrCIv34okcEO-arYZD",
+    event_callback: callback,
+  });
+
+  return false;
+}
 /** ✅ Ajuste aqui se quiser: nome + slug (pasta) */
 const CIDADES: Array<{ name: string; slug: string }> = [
   { name: "Santo André", slug: "santo-andre" },
