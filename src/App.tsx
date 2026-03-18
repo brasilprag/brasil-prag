@@ -42,6 +42,7 @@ const ROTA = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComp
 function wa(msg: string) {
   return `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(msg)}`;
 }
+
 function gtag_report_conversion(url: string) {
   const callback = function () {
     if (typeof url !== "undefined") {
@@ -50,8 +51,8 @@ function gtag_report_conversion(url: string) {
   };
 
   // @ts-ignore
-  gtag("event", "conversion", {
-    send_to: "AW-17998499183/BxMrCIv34okcEO-arYZD",
+  window.gtag?.("event", "conversion", {
+    send_to: "AW-17998499183/BxMrCIv34okcE0-arYZD",
     event_callback: callback,
   });
 
